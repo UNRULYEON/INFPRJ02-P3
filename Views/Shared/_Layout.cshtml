@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - INFPRJ02_P3</title>
+    <title>@ViewData["Title"] - Team Omega</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,13 +26,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">INFPRJ02_P3</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Team Omega</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="oSubteamOne">Subteam 1</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="oSubteamTwo">Subteam 2</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="oSubteamThree">Subteam 3</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -41,7 +43,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - INFPRJ02_P3</p>
+            <p>&copy; 2018 - Team Omega</p>
         </footer>
     </div>
 

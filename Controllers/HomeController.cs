@@ -15,16 +15,30 @@ namespace INFPRJ02_P3.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult oSubteamOne()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Subteam 1.";
 
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult oSubteamTwo()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Subteam 2.";
+
+            return View();
+        }
+
+        public IActionResult oSubteamThree()
+        {
+            ViewData["Message"] = "Subteam 3.";
+
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
 
             return View();
         }
