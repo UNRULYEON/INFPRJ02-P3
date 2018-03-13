@@ -12541,11 +12541,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Datpu\\MvcMovie\\MvcMovie.csproj",
+      "projectUniqueName": "C:\\Users\\Datpu\\Documents\\GitHub\\INFPRJ02-P3\\MvcMovie\\MvcMovie.csproj",
       "projectName": "MvcMovie",
-      "projectPath": "C:\\Users\\Datpu\\MvcMovie\\MvcMovie.csproj",
+      "projectPath": "C:\\Users\\Datpu\\Documents\\GitHub\\INFPRJ02-P3\\MvcMovie\\MvcMovie.csproj",
       "packagesPath": "C:\\Users\\Datpu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Datpu\\MvcMovie\\obj\\",
+      "outputPath": "C:\\Users\\Datpu\\Documents\\GitHub\\INFPRJ02-P3\\MvcMovie\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12578,6 +12578,7 @@
             "version": "[2.0.5, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true

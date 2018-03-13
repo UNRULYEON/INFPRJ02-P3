@@ -19,20 +19,20 @@ namespace MvcMovie
            
             return View();
         }
-        public IActionResult About()
+        public IActionResult deelvraagEen()
         {
             
             ViewData["Message"] = "Your application description page.";
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult deelvraagTwee()
         {
             ViewData["Message"] = "Your contact page.";
 
             return View();
         }
-        public IActionResult Deelvraag(int? value)
+        public IActionResult deelvraag(int? value)
         {
             ViewData["Message"] = "deelvraag 3.";
             var list = new List<SelectListItem>();
@@ -55,7 +55,7 @@ namespace MvcMovie
         {
             ViewData["Message"] = "deelvraag 3.";
             var migratie = MvcMovie.Request.GenerateFromJson("https://opendata.cbs.nl/ODataApi/OData/82809NED/TypedDataSet","$top=100&$filter=Migratieachtergrond eq '2012657' or Migratieachtergrond eq '2012655'");
-            return View("Deelvraag");
+            return View("deelvraag");
         }
         public IActionResult Error()
         {
