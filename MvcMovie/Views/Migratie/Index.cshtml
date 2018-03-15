@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@using Models
+@model FilterOptions
+
+@{
+    ViewBag.Title = "MigratieAchtergrond";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    if (@ViewData["Filters"] is FilterOptions filter)
+    {
+        @Html.DropDownListFor(m => m.Age, filter.SelectedAge, "Leeftijd")
+        
+        @Html.DropDownListFor(m => m.Gender, filter.SelectedGender, "Geslacht")
+        
+        @Html.DropDownListFor(m => m.MigratieAchtergrond, filter.SelectedMigratieAchtergrond, "Achtergrond")
+    }
+    <input type="submit", value="Search">
+}
+<div>
+    @{
+        var genlist = ViewData["migratie"] as Root;
+        if (genlist?.Value != null)
+        {
+            foreach (var item in genlist.Value)
+            {
+                <p>@item.Geslacht</p>
+                <p>@item.Leeftijd</p>
+                <p>@item.Migratieachtergrond</p>
+            }
+        }
+    }
+</div>

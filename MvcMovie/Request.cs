@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp;
 using Models;
 
 namespace MvcMovie
@@ -34,6 +38,17 @@ namespace MvcMovie
                 }
                 return null;
             }
+
+        public static List<SelectListItem> CreateList(string source)
+        {
+            var root = GetRequest("https://opendata.cbs.nl/ODataApi/OData/" + source);
+            var temp = new List<SelectListItem>();
+            foreach (var entry in root.Value)
+            {
+                temp.Add(new SelectListItem{ Text = entry.Title, Value = entry.Key});
+            }
+            return temp;
+        }
             public static Root GetRequest(string url)
             {
                 var client = new HttpClient();
