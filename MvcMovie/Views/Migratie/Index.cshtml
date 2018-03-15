@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Rendering
 @using Models
+@using Newtonsoft.Json
+@using JsonSerializer = Microsoft.ApplicationInsights.Extensibility.Implementation.JsonSerializer
 @model FilterOptions
 
 @{
@@ -16,10 +18,55 @@
         @Html.DropDownListFor(m => m.Gender, filter.SelectedGender, "Geslacht")
         
         @Html.DropDownListFor(m => m.MigratieAchtergrond, filter.SelectedMigratieAchtergrond, "Achtergrond")
+        
+        @Html.DropDownListFor(m => m.Period, filter.SelectedPeriod, "Perioden")
     }
     <input type="submit", value="Search">
 }
-<div>
+@{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+    <script>
+        var migVal = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Val));
+        var migLab = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Lab));
+        var barChartData =
+        {
+            labels:migLab,
+            datasets: [
+                {
+                    label: 'Chart',
+                    backgroundColor:"#f990a7",
+                    borderWidth: 2,
+                    data: migVal
+                }
+            ]
+        };
+
+        window.onload = function() {
+            var ctx1 = document.getElementById("barcanvas").getContext("2d");
+            window.myBar = new Chart(ctx1,
+                {
+                    type: 'bar',
+                    data: barChartData,
+                    options:
+                    {
+                        title:
+                        {
+                            display: true,
+                            text: "ProductWise Sales Count"
+                        },
+                        responsive: true,
+                        maintainAspectRatio: true
+                    }
+                });
+        }
+    </script>
+}
+<body>  
+<div style="text-align: center">  
+    <canvas id="barcanvas"></canvas>  
+</div>  
+</body>  
+@*<div>
     @{
         var genlist = ViewData["migratie"] as Root;
         if (genlist?.Value != null)
@@ -32,4 +79,4 @@
             }
         }
     }
-</div>
+</div>*@

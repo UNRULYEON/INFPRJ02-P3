@@ -11,5 +11,7 @@ namespace Models
         public List<SelectListItem> SelectedGender { get; set; }
         public string MigratieAchtergrond{ get; set; }
         public List<SelectListItem> SelectedMigratieAchtergrond { get; set; }
+        public string Period{ get; set; }
+        public List<SelectListItem> SelectedPeriod { get; set; }
     }
 }

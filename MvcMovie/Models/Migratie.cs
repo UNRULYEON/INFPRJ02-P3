@@ -10,9 +10,6 @@
 
     public partial class Root
     {
-        [JsonProperty("odata.metadata")]
-        public string OdataMetadata { get; set; }
-
         [JsonProperty("value")]
         public List<Value> Value { get; set; }
     }

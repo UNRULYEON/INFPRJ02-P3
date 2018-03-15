@@ -18,11 +18,13 @@ namespace MvcMovie
                 var leeftijd =                       GetRequest("https://opendata.cbs.nl/ODataApi/OData/82809NED/Leeftijd");
                 var geslacht =                       GetRequest("https://opendata.cbs.nl/ODataApi/OData/82809NED/Geslacht");
                 var migratieachtergrond =            GetRequest("https://opendata.cbs.nl/ODataApi/OData/82809NED/Migratieachtergrond");
+                var perioden =            GetRequest("https://opendata.cbs.nl/ODataApi/OData/82809NED/Perioden");
                 foreach (var entry in temp.Value)
                 {
                     entry.Leeftijd =                 ConvertToString(leeftijd,entry.Leeftijd);
                     entry.Geslacht =                 ConvertToString(geslacht,entry.Geslacht);
                     entry.Migratieachtergrond =      ConvertToString(migratieachtergrond,entry.Migratieachtergrond);
+                    entry.Perioden =                 ConvertToString(perioden,entry.Perioden);
                     //entry.Units =                toDictionary(entry,dataproperties,entry.Beroepsbevolking2);
                     //var welcome = GenerateFromJson("https://opendata.cbs.nl/ODataApi/OData/82809NED/TypedDataSet","$top=100&$filter=Migratieachtergrond eq '2012657' or Migratieachtergrond eq '2012655'");
 
@@ -57,5 +59,13 @@ namespace MvcMovie
                 var responseBody = responseJson.Content.ReadAsStringAsync().Result;
                 return Value.FromJson(responseBody);
             }
+        public static string getJSON(string url)
+        {
+            var client = new HttpClient();
+            HttpResponseMessage responseJson = client.GetAsync(url).Result;  
+            responseJson.EnsureSuccessStatusCode();
+            var responseBody = responseJson.Content.ReadAsStringAsync().Result;
+            return responseBody;
+        }
     }
 }
