@@ -11,57 +11,63 @@
 {
     if (@ViewData["Filters"] is FilterOptions filter)
     {
-        @Html.DropDownListFor(m => m.Age, filter.SelectedAge, "Leeftijd") <br>
+       
         
-        @Html.DropDownListFor(m => m.Gender, filter.SelectedGender, "Geslacht") <br>
+        @Html.DropDownListFor(m => m.Gender, filter.SelectedGender, "Geslacht", 
+            new { id="Gender"}) <br>
+                                                                                                  
+        @Html.DropDownListFor(m => m.Age, filter.SelectedAge, "Leeftijd", 
+            new { id="Age"}) <br>
         
-        @Html.DropDownListFor(m => m.Period, filter.SelectedPeriod, "Perioden") <br>
+        @Html.DropDownListFor(m => m.Period, filter.SelectedPeriod, "Perioden", 
+            new { id="Period"}) <br>
         
-        @Html.DropDownListFor(m => m.Criteria, filter.SelectedCriteria, "Criteria") <br>
+        @Html.DropDownListFor(m => m.Criteria, filter.SelectedCriteria, "Criteria", 
+            new { id="Crit"}) <br>
         
-        @Html.DropDownListFor(m => m.MigratieAchtergrond, filter.SelectedMigratieAchtergrond, "Set 1: Achtergrond")  <br>
+        @Html.DropDownListFor(m => m.MigratieAchtergrond, filter.SelectedMigratieAchtergrond, "Set 1: Achtergrond", 
+            new { id="Background"})  <br>
                                                                                                               
-        @Html.DropDownListFor(m => m.MigratieAchtergrond2, filter.SelectedMigratieAchtergrond, "Set 2: Achtergrond")  <br>
+        @Html.DropDownListFor(m => m.MigratieAchtergrond2, filter.SelectedMigratieAchtergrond, "Set 2: Achtergrond" , 
+            new { id="Background2"})  <br>
                                                                                                               
     }
     <input type="submit", value="Search">
 }
+
 @{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
+        $.ajaxSetup({
+            async: false
+        });
         @* Fix this garbage *@
         var root = "@ViewData["root"]";
-        var age = "@ViewData["age"]";
-        var gender = "@ViewData["gender"]";
-        var background = "@ViewData["background"]";
-        var background2 = "@ViewData["background2"]";
-        var period = "@ViewData["period"]";
-        var querystring = root + "$filter=Leeftijd eq " + "'" + age + "'" +
-            " and " + "Geslacht eq " + "'" + gender + "'" + 
-            " and " + "Migratieachtergrond eq " + "'" + background + "'" +
-            " and " + "Perioden eq " + "'" + period + "'";
-        var querystring2 = root + "$filter=Leeftijd eq " + "'" + age + "'" +
-            " and " + "Geslacht eq " + "'" + gender + "'" + 
-            " and " + "Migratieachtergrond eq " + "'" + background2 + "'" +
-            " and " + "Perioden eq " + "'" + period + "'";
+        var Gender = document.getElementById("Gender");
+        var Age = document.getElementById("Age").value;
+        var Period = document.getElementById("Period").value;
+        var Crit = document.getElementById("Crit");
+        var Background = document.getElementById("Background");
+        var Background2 = document.getElementById("Background2");
+        var querystring = root + "$filter=Leeftijd eq " + "'" + Age + "'" +
+            " and " + "Geslacht eq " + "'" + Gender.value + "'" + 
+            " and " + "Migratieachtergrond eq " + "'" + Background.value + "'" + 
+            " or " + "Migratieachtergrond eq " + "'" + Background2.value + "'" + 
+            " and " + "Perioden eq " + "'" + Period + "'";
         var values = [];
         @* Fix this garbage *@
         var one = $.get(
             querystring,
             function(data) {
-                values[0] = data.value[0].Beroepsbevolking_2;       
+                console.log(Crit);
+                values[0] = data.value[0][Crit.value];
+                values[1] = data.value[1][Crit.value];     
             });
-        var two = $.get(
-            querystring2,
-            function(data) {
-                values[1] = data.value[0].Beroepsbevolking_2;
-            });
-        $.when(one, two).then(function() {
 
         
         var barChartData = {
-            labels: ['Westerse migratieachtergrond', 'Niet-westerse migratieachtergrond'],
+            labels: [Background.selectedOptions[0].text, Background2.selectedOptions[0].text],
             datasets: [{
                 label: 'Dataset 1',
                 backgroundColor: ["#b994a7","#fff2a7"],
@@ -81,14 +87,14 @@
                         title:
                         {
                             display: true,
-                            text: "BeroepsBevolking x1000"
+                            text: Crit.selectedOptions[0].text + " x1000"
                         },
                         responsive: true,
                         maintainAspectRatio: true
                     }
                 });
         }
-        });
+        console.log(Background.selectedOptions[0].text);
 
     </script>
 }
