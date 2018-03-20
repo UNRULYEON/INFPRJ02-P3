@@ -9,10 +9,11 @@
       <e p="bundleconfig.json" t="Include" />
       <e p="Controllers" t="Include">
         <e p="HomeController.cs" t="Include" />
-        <e p="TestController.cs" t="Include" />
+        <e p="MigratieController.cs" t="Include" />
       </e>
       <e p="Models" t="Include">
         <e p="ErrorViewModel.cs" t="Include" />
+        <e p="FilterOptions.cs" t="Include" />
         <e p="Leeftijd.cs" t="Include" />
         <e p="Migratie.cs" t="Include" />
       </e>
@@ -38,6 +39,9 @@
           <e p="deelvraagTwee.cshtml" t="Include" />
           <e p="Index.cshtml" t="Include" />
         </e>
+        <e p="Migratie" t="Include">
+          <e p="Index.cshtml" t="Include" />
+        </e>
         <e p="Shared" t="Include">
           <e p="_Layout.cshtml" t="Include" />
           <e p="_ValidationScriptsPartial.cshtml" t="Include" />
@@ -55,6 +59,7 @@
           <e p="banner2.svg" t="Include" />
           <e p="banner3.svg" t="Include" />
           <e p="banner4.svg" t="Include" />
+          <e p="logo.png" t="Include" />
         </e>
         <e p="js" t="Include">
           <e p="site.js" t="Include" />
