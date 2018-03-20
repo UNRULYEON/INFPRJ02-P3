@@ -72,9 +72,9 @@
                 label: 'Dataset 1',
                 backgroundColor: ["#b994a7","#fff2a7"],
                 borderWidth: 1,
+                fontSize: 48,
                 data: values
             }]
-
         };
         window.onload = function() {
             var ctx1 = document.getElementById("barcanvas").getContext("2d");
@@ -86,11 +86,19 @@
                     {
                         title:
                         {
+                            fontSize: 48,
                             display: true,
                             text: Crit.selectedOptions[0].text + " x1000"
                         },
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                fontSize: 40
+                            }
+                        },
                         responsive: true,
-                        maintainAspectRatio: true
+                        maintainAspectRatio: true,
+                        
                     }
                 });
         }
@@ -99,7 +107,7 @@
     </script>
 }
 <body>  
-<div style="text-align: center">  
+<div style="text-align: center" width = "25%" height ="25%">  
     <canvas id="barcanvas"></canvas>  
 </div>  
 </body>  

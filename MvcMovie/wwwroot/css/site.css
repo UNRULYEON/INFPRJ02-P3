@@ -33,3 +33,7 @@
         display: none;
     }
 }
+canvas#barcanvas{
+    height: 40% !important;
+    width: 40% !important;
+}
