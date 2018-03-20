@@ -17,4 +17,14 @@ namespace Models
         public string MigratieAchtergrond2{ get; set; }
         public List<SelectListItem> SelectedMigratieAchtergrond { get; set; }
     }
+
+    public class Deelvraag1FilterOptions
+    {
+        public string Bedrijfstak { get; set; }
+        public List<SelectListItem> SelectedBedrijfstak { get; set; }
+        public string Regio{ get; set; }
+        public List<SelectListItem> SelectedRegio { get; set; }
+        public string Period{ get; set; }
+        public List<SelectListItem> SelectedPeriod { get; set; }
+    }
 }
