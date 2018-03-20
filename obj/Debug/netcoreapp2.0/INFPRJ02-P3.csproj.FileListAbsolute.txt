@@ -8,3 +8,4 @@ C:\Users\Glitc\OneDrive\Documenten\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\IN
 C:\Users\Glitc\OneDrive\Documenten\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.AssemblyInfo.cs
 C:\Users\Glitc\OneDrive\Documenten\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.dll
 C:\Users\Glitc\OneDrive\Documenten\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.pdb
+C:\Users\Glitc\OneDrive\Documenten\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.csprojResolveAssemblyReference.cache
