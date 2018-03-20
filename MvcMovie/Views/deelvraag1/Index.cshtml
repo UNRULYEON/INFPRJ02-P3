@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@using Models
+@model Deelvraag1FilterOptions
+
+@{
+    ViewBag.Title = "Jongeren";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    if (@ViewData["Filters"] is Deelvraag1FilterOptions filter)
+    {
+       
+        
+        @Html.DropDownListFor(m => m.Regio, filter.SelectedRegio, "Geslacht", 
+            new { id="regio"}) <br>
+                                                                                                  
+        @Html.DropDownListFor(m => m.Bedrijfstak, filter.SelectedBedrijfstak, "Leeftijd", 
+            new { id="bedrijf"}) <br>
+        
+        @Html.DropDownListFor(m => m.Period, filter.SelectedPeriod, "Perioden", 
+            new { id="Period"}) <br>
+                                                                                                              
+    }
+    <input type="submit", value="Search">
+}
+
+@{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script>
+        $.ajaxSetup({
+            async: false
+        });
+        @* Fix this garbage *@
+        var root = "@ViewData["root"]";
+        var regio = document.getElementById("regio").value;
+        var Period = document.getElementById("Period").value;
+        var bedrijf = document.getElementById("bedrijf");
+        var querystring = root + "$filter=RegioS eq " + "'" +regio + "'" +
+            " and " + "BedrijfstakkenBranchesSBI2008 eq " + "'" + bedrijf.value + "'" +
+            " and " + "Perioden eq " + "'" + Period + "'";
+        var values = [];
+        console.log(bedrijf.value);
+        @* Fix this garbage *@
+        var one = $.get(
+            querystring,
+            function(data) {
+                console.log(data.value);
+                values[0] = data.value[0].OpenstaandeVacatures_1;
+                values[1] = data.value[0].OpenstaandeVacatures_1;     
+            });
+
+        
+        var barChartData = {
+            labels: ["5", "3"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: ["#b994a7","#fff2a7"],
+                borderWidth: 1,
+                fontSize: 48,
+                data: values
+            }]
+        };
+        window.onload = function() {
+            var ctx1 = document.getElementById("barcanvas").getContext("2d");
+            window.myBar = new Chart(ctx1,
+                {
+                    type: 'pie',
+                    data: barChartData,
+                    options:
+                    {
+                        title:
+                        {
+                            fontSize: 48,
+                            display: true,
+                            text: "test" + " x1000"
+                        },
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                fontSize: 40
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: true
+                        
+                    }
+                });
+        }
+    </script>
+}
+<body>  
+<div style="text-align: center" width = "25%" height ="25%">  
+    <canvas id="barcanvas"></canvas>  
+</div>  
+</body>  
