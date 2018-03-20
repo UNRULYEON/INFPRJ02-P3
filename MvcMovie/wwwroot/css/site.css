@@ -37,3 +37,19 @@ canvas#barcanvas{
     height: 40% !important;
     width: 40% !important;
 }
+.navbar-inverse {
+    background-color: #3b36b5 !important;
+    border-color: #21166e !important;
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #f2499d !important;
+    background-color: transparent;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff !important;
+}
+.navbar-inverse .navbar-brand {
+    color: #fff !important;
+}
+p.navbar-brand {
+    color: #fff !important;
