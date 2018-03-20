@@ -12535,23 +12535,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Glitc\\.nuget\\packages\\": {},
+    "C:\\Users\\Jordy\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Glitc\\OneDrive\\Documenten\\Github\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
+      "projectUniqueName": "C:\\Users\\Jordy\\Documents\\GitHub\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
       "projectName": "INFPRJ02-P3",
-      "projectPath": "C:\\Users\\Glitc\\OneDrive\\Documenten\\Github\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
-      "packagesPath": "C:\\Users\\Glitc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Glitc\\OneDrive\\Documenten\\Github\\INFPRJ02-P3\\obj\\",
+      "projectPath": "C:\\Users\\Jordy\\Documents\\GitHub\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
+      "packagesPath": "C:\\Users\\Jordy\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jordy\\Documents\\GitHub\\INFPRJ02-P3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Glitc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jordy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12575,14 +12578,14 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.All": {
-            "target": "Package",
-            "version": "[2.0.5, )"
-          },
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "[2.0.0, )",
+            "version": "2.0",
             "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "2.0.5"
           }
         },
         "imports": [
