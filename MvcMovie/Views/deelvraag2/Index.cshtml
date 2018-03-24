@@ -12,15 +12,11 @@
     if (@ViewData["Filters"] is Deelvraag2FilterOptions filter)
     {
 
-
-        @Html.DropDownListFor(m => m.WOZWaardeklassen, filter.selectedWOZWaardeklassen, "WOZWaardeklassen",
-                 new { id = "waardeklas" }) <br>
-
         @Html.DropDownListFor(m => m.BrutoInkomen, filter.selectedBrutoInkomen, "BrutoInkomen",
-                 new { id = "bruto" }) <br>
+                           new { id = "bruto" }) <br>
 
-        @Html.DropDownListFor(m => m.Huishoudens, filter.selectedHuishoudens, "Huishoudens",
-                 new { id = "Huishouden" }) <br>
+        @Html.DropDownListFor(m => m.Perioden, filter.selectedPerioden, "Jaar",
+                           new { id = "Perioden" }) <br>
 
     }
     <input type="submit" , value="Search">
@@ -33,27 +29,37 @@
         $.ajaxSetup({
             async: false
         });
+       
         @* Fix this garbage *@
         var root = "@ViewData["root"]";
-        var regio = document.getElementById("waardeklas").value;
-        var Period = document.getElementById("bruto").value;
-        var bedrijf = document.getElementById("Huishouden");
-        var oldquerystring = root + "$filter=RegioS eq " + "'" +regio + "'" +
-            " and " + "BedrijfstakkenBranchesSBI2008 eq " + "'" + bedrijf.value + "'" +
-            " and " + "Perioden eq " + "'" + Period + "'";
-        var querystring = ; 
+        var regio = "@ViewData["regios"]";
+        var Period = document.getElementById("Perioden").value;
+        var bruto = document.getElementById("bruto");
+        var querystring = root + "$filter=Perioden eq " + "'" + Period + "'" + "&$top=9999";
         var values = [];
-        console.log(bedrijf.value);
-        @* Fix this garbage *@
+        var fuck = 0;
+        var test = @Html.Raw(Json.Serialize(ViewData["filters"]));
+        function createQuerystring(arg) {
+            var prefix = root + "$filter=Perioden eq " + "'" + Period + "'";
+            var append = " and $filter=RegioS eq " + "'" + arg + "'";
+            return prefix + append;
+
+        }
+        @* Fix this garbage 
+        for (var entry in test.selectedRegioS) {
+            var one = $.get(
+                createQuerystring(test.selectedRegioS[entry].value),
+                function (data) {
+                    values[entry] = data.value.length;
+                }); 
+        }*@
         var one = $.get(
-            querystring,
-            function(data) {
-                console.log(data.value);
-                values[0] = data.value[0].OpenstaandeVacatures_1;
-                values[1] = data.value[0].OpenstaandeVacatures_1;
-            });
+            createQuerystring(test.selectedRegioS[0].value),
+            function (data) {
+                values[0] = data.value.length;
+            }); 
 
-
+        console.log(values);
         var barChartData = {
             labels: ["5", "3"],
             datasets: [{
@@ -61,7 +67,7 @@
                 backgroundColor: ["#b994a7","#fff2a7"],
                 borderWidth: 1,
                 fontSize: 48,
-                data: values
+                data: [54,54]
             }]
         };
         window.onload = function() {
@@ -83,7 +89,11 @@
                                 // This more specific font property overrides the global property
                                 fontSize: 40
                             }
-                        },
+                            },
+                            tooltips: {
+                                titleFontSize: 40,
+                                bodyFontSize: 40
+                            },
                         responsive: true,
                         maintainAspectRatio: true
 

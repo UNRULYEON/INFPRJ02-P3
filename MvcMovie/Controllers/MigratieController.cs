@@ -38,7 +38,7 @@ namespace MvcMovie
             {
                 SelectedAge = MvcMovie.Request.CreateList("82809NED/Leeftijd"),
                 SelectedGender = MvcMovie.Request.CreateList("82809NED/Geslacht"),
-                SelectedMigratieAchtergrond = MvcMovie.Request.CreateList("82809NED/Migratieachtergrond"),
+                SelectedMigratieAchtergrond = MvcMovie.Request.CreateList("82809NED/Migratieachtergrond?$filter=Key eq '2012657' or Key eq '2012655' or Key eq '2012605' or Key eq '1012600' or Key eq 'T001040'"),
                 SelectedPeriod = MvcMovie.Request.CreateList("82809NED/Perioden?$filter=endswith(Title,'kwartaal') eq false"),
                 SelectedCriteria = MvcMovie.Request.CreateList("82809NED/DataProperties?$select=Key,Title,Description&$filter=Key eq 'Beroepsbevolking_2' or Key eq 'Werknemer_4' or Key eq 'WerklozeBeroepsbevolking_20'")
             };

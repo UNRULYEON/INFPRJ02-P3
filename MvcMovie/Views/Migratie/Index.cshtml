@@ -18,18 +18,8 @@
                                                                                                   
         @Html.DropDownListFor(m => m.Age, filter.SelectedAge, "Leeftijd", 
             new { id="Age"}) <br>
-        
-        @Html.DropDownListFor(m => m.Period, filter.SelectedPeriod, "Perioden", 
-            new { id="Period"}) <br>
-        
         @Html.DropDownListFor(m => m.Criteria, filter.SelectedCriteria, "Criteria", 
             new { id="Crit"}) <br>
-        
-        @Html.DropDownListFor(m => m.MigratieAchtergrond, filter.SelectedMigratieAchtergrond, "Set 1: Achtergrond", 
-            new { id="Background"})  <br>
-                                                                                                              
-        @Html.DropDownListFor(m => m.MigratieAchtergrond2, filter.SelectedMigratieAchtergrond, "Set 2: Achtergrond" , 
-            new { id="Background2"})  <br>
                                                                                                               
     }
     <input type="submit", value="Search">
@@ -42,53 +32,108 @@
         $.ajaxSetup({
             async: false
         });
-        @* Fix this garbage *@
         var root = "@ViewData["root"]";
         var Gender = document.getElementById("Gender");
         var Age = document.getElementById("Age").value;
-        var Period = document.getElementById("Period").value;
         var Crit = document.getElementById("Crit");
         var Background = document.getElementById("Background");
         var Background2 = document.getElementById("Background2");
-        var querystring = root + "$filter=Leeftijd eq " + "'" + Age + "'" +
-            " and " + "Geslacht eq " + "'" + Gender.value + "'" + 
-            " and " + "Migratieachtergrond eq " + "'" + Background.value + "'" + 
-            " or " + "Migratieachtergrond eq " + "'" + Background2.value + "'" + 
-            " and " + "Perioden eq " + "'" + Period + "'";
+        var filterdata = @Html.Raw(Json.Serialize(ViewData["filters"]));
         var values = [];
-        @* Fix this garbage *@
-        var one = $.get(
-            querystring,
-            function(data) {
-                console.log(Crit);
-                values[0] = data.value[0][Crit.value];
-                values[1] = data.value[1][Crit.value];     
-            });
-
-        
+        var labels = [];
+        var periodes = [];
+        for (var entry in filterdata.selectedPeriod) {
+            periodes[entry] = filterdata.selectedPeriod[entry].text;
+        }
+        function createQuerystring(arg) {
+            var temp = root + "$filter=endswith(Perioden,'JJ00') eq true and " +
+                "Leeftijd eq " + "'" + Age + "'" +
+                " and " + "Geslacht eq " + "'" + Gender.value + "'" + 
+                " and " + "Migratieachtergrond eq " + "'" + arg + "'";
+            return temp;
+        }
+        for (var achtergrond in filterdata.selectedMigratieAchtergrond) {
+            var one = $.get(
+                createQuerystring(filterdata.selectedMigratieAchtergrond[achtergrond].value),
+                function(data) {
+                    var temp = [];
+                    for (var entry in data.value) {
+                        temp[entry] = data.value[entry][Crit.value];
+                    }
+                    values[achtergrond] = temp;
+                    labels[achtergrond] = filterdata.selectedMigratieAchtergrond[achtergrond].text; 
+                });
+        }
         var barChartData = {
-            labels: [Background.selectedOptions[0].text, Background2.selectedOptions[0].text],
+            labels: periodes,
             datasets: [{
-                label: 'Dataset 1',
-                backgroundColor: ["#21166e ","#f2499d"],
-                borderWidth: 1,
+                label: labels,
+                backgroundColor: "#21166e ",
+                borderColor: "#21166e ",
+                borderWidth: 12,
+                fill: false,
                 fontSize: 48,
                 data: values
             }]
         };
+        console.log(values);
         window.onload = function() {
             var ctx1 = document.getElementById("barcanvas").getContext("2d");
             window.myBar = new Chart(ctx1,
                 {
-                    type: 'pie',
-                    data: barChartData,
+                    type: 'line',
+                    data: {
+                        labels: periodes,
+                        datasets: [{
+                            label: labels[0],
+                            backgroundColor: "#21166e ",
+                            borderColor: "#21166e ",
+                            borderWidth: 3,
+                            fill: false,
+                            fontSize: 48,
+                            data: values[0]
+                    }, 
+                        {    
+                        label: labels[1],
+                        backgroundColor: "#685ea8 ",
+                        borderColor: "#685ea8 ",
+                        borderWidth: 3,
+                        fill: false,
+                        fontSize: 48,
+                        data: values[1]
+                    }, 
+                            {    
+                                label: labels[2],
+                                backgroundColor: "#f6ff00 ",
+                                borderColor: "#f6ff00 ",
+                                borderWidth: 3,
+                                fill: false,
+                                fontSize: 48,
+                                data: values[2]
+                            },
+                            {    
+                                label: labels[3],
+                                backgroundColor: "#ed559c ",
+                                borderColor: "#ed559c ",
+                                borderWidth: 3,
+                                fill: false,
+                                fontSize: 48,
+                                data: values[3]
+                            }, 
+                            {    
+                                label: labels[4],
+                                backgroundColor: "#81ff47 ",
+                                borderColor: "#81ff47 ",
+                                borderWidth: 3,
+                                fill: false,
+                                fontSize: 48,
+                                data: values[4]
+                            }],
                     options:
                     {
-                        title:
-                        {
-                            fontSize: 48,
+                        title: {
                             display: true,
-                            text: Crit.selectedOptions[0].text + " x1000"
+                            text: 'Chart.js Line Chart - Logarithmic'
                         },
                         legend: {
                             labels: {
@@ -101,12 +146,12 @@
                             bodyFontSize: 40
                         },
                         responsive: true,
-                        maintainAspectRatio: true,
+                        maintainAspectRatio: true
                         
                     }
-                });
+                }
+                    });
         }
-        console.log(Background.selectedOptions[0].text);
 
     </script>
 }

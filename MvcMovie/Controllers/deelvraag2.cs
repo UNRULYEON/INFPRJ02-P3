@@ -20,9 +20,9 @@ namespace MvcMovie
             }
             var filters = new Deelvraag2FilterOptions()
             {
-                selectedWOZWaardeklassen = MvcMovie.Request.CreateList("81953NED/WOZWaardeklassen"),
                 selectedBrutoInkomen = MvcMovie.Request.CreateList("81953NED/BrutoInkomen"),
-                selectedHuishoudens = MvcMovie.Request.CreateList("81953NED/Huishoudens"),
+                selectedPerioden = MvcMovie.Request.CreateList("81953NED/Perioden"),
+                selectedRegioS = MvcMovie.Request.CreateList("81953NED/RegioS?$filter=endswith(Title,'PV)') eq true"),
             };
             ViewData["Filters"] = filters;
             return View();
