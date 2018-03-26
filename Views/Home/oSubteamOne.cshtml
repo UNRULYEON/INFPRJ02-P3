@@ -4,6 +4,8 @@
 <h2>@ViewData["Title"]</h2>
 <h1>Op welke manier wordt het autoverkeer op de hoofdsnelwegen in de Randstad beïnvloed door het weer?</h1>
 
+<p style="font-size: 24px; font-weight: bold; text-align: center;">Klik op de naam in de legenda om ze aan en uit te zetten</p>
+
 <canvas id="myChart" width="150" height="75"></canvas>
 
 <script>
@@ -62,7 +64,8 @@
                 type: 'line'
             }, {
                 label: 'Regen (mm)',
-                data: [21, 25, 17, 11, 11, 14, 46, 16, 62, 29, 29, 43],
+                //data: [21, 25, 17, 11, 11, 14, 46, 16, 62, 29, 29, 43],
+                data: [2.1, 2.5, 1.7, 1.1, 1.1, 1.4, 4.6, 1.6, 6.2, 2.9, 2.9, 4.3],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
