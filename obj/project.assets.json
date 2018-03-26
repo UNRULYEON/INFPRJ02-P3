@@ -12541,11 +12541,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
+      "projectUniqueName": "C:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
       "projectName": "INFPRJ02-P3",
-      "projectPath": "c:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
+      "projectPath": "C:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
       "packagesPath": "C:\\Users\\Glitc\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\obj\\",
+      "outputPath": "C:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
