@@ -12535,26 +12535,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\abdik\\.nuget\\packages\\": {},
+    "C:\\Users\\Glitc\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\abdik\\Documents\\po3\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
+      "projectUniqueName": "c:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
       "projectName": "INFPRJ02-P3",
-      "projectPath": "C:\\Users\\abdik\\Documents\\po3\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
-      "packagesPath": "C:\\Users\\abdik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\abdik\\Documents\\po3\\INFPRJ02-P3\\obj\\",
+      "projectPath": "c:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
+      "packagesPath": "C:\\Users\\Glitc\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Glitc\\Documents\\Github\\INFPRJ02-P3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\abdik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Glitc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

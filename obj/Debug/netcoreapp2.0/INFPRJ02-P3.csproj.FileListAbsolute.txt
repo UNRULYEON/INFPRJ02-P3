@@ -20,3 +20,14 @@ C:\Users\abdik\Documents\po3\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.Ass
 C:\Users\abdik\Documents\po3\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.AssemblyInfo.cs
 C:\Users\abdik\Documents\po3\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.dll
 C:\Users\abdik\Documents\po3\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.pdb
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\bin\Debug\netcoreapp2.0\INFPRJ02-P3.deps.json
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\bin\Debug\netcoreapp2.0\INFPRJ02-P3.runtimeconfig.json
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\bin\Debug\netcoreapp2.0\INFPRJ02-P3.runtimeconfig.dev.json
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\bin\Debug\netcoreapp2.0\INFPRJ02-P3.dll
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\bin\Debug\netcoreapp2.0\INFPRJ02-P3.pdb
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.csprojResolveAssemblyReference.cache
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.csproj.CoreCompileInputs.cache
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.AssemblyInfoInputs.cache
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.AssemblyInfo.cs
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.dll
+C:\Users\Glitc\Documents\Github\INFPRJ02-P3\obj\Debug\netcoreapp2.0\INFPRJ02-P3.pdb
