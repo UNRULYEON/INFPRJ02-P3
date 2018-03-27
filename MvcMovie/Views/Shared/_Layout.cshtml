@@ -17,27 +17,29 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area=""class="navbar-brand">Team Grande</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">HoofdVraag</a></li>
-                    <li><a asp-area="" asp-controller="deelvraag1" asp-action="Index">Deelvraag 1</a></li>
-                    <li><a asp-area="" asp-controller="deelvraag2" asp-action="Index">Deelvraag 2</a></li>
-                    <li><a asp-area="" asp-controller="Migratie" asp-action="Index">Deelvraag 3</a></li>
-                </ul>
-            </div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-header">
+        <figure class="logo">
+            <img src="https://www.grandeomega.com/GrandeOmega/images/logo.svg" alt="">
+        </figure>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Team Grande</a>
         </div>
-    </nav>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">                    
+                <li><a asp-area="" asp-controller="deelvraag1" asp-action="Index">Deelvraag 1</a></li>
+                <li><a asp-area="" asp-controller="deelvraag2" asp-action="Index">Deelvraag 2</a></li>
+                <li><a asp-area="" asp-controller="Migratie" asp-action="Index">Deelvraag 3</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
