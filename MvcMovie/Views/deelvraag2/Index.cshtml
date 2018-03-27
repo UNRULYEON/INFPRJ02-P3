@@ -80,13 +80,15 @@
             var ctx1 = document.getElementById("barcanvas").getContext("2d");
             window.myBar = new Chart(ctx1,
                 {
-                    type: 'line',
+                    type: 'bar',
                     data: {
                         labels: periodes,
                         datasets: [{
                             label: labels[0],
                             backgroundColor: "#21166e ",
                             borderColor: "#21166e ",
+                            hoverBackgroundColor: '#4bf259',
+                            hoverBorderColor: '#4bf259',
                             borderWidth: 3,
                             fill: false,
                             fontSize: 48,
@@ -94,8 +96,10 @@
                         },
                         {
                             label: labels[1],
-                            backgroundColor: "#685ea8 ",
-                            borderColor: "#685ea8 ",
+                            backgroundColor: "#bc04f9 ",
+                            borderColor: "#bc04f9 ",
+                            hoverBackgroundColor: '#4bf259',
+                            hoverBorderColor: '#4bf259',
                             borderWidth: 3,
                             fill: false,
                             fontSize: 48,
@@ -103,8 +107,10 @@
                         },
                         {
                             label: labels[2],
-                            backgroundColor: "#f6ff00 ",
-                            borderColor: "#f6ff00 ",
+                            backgroundColor: "#3b36b5 ",
+                            borderColor: "#3b36b5 ",
+                            hoverBackgroundColor: '#4bf259',
+                            hoverBorderColor: '#4bf259',
                             borderWidth: 3,
                             fill: false,
                             fontSize: 48,
@@ -112,8 +118,10 @@
                             },
                             {
                                 label: labels[3],
-                                backgroundColor: "#f6ff00 ",
-                                borderColor: "#f6ff00 ",
+                                backgroundColor: "#000000 ",
+                                borderColor: "#000000 ",
+                                hoverBackgroundColor: '#4bf259',
+                                hoverBorderColor: '#4bf259',
                                 borderWidth: 3,
                                 fill: false,
                                 fontSize: 48,
@@ -121,8 +129,10 @@
                             },
                             {
                                 label: labels[4],
-                                backgroundColor: "#f6ff00 ",
-                                borderColor: "#f6ff00 ",
+                                backgroundColor: "#f2499d ",
+                                borderColor: "#f2499d ",
+                                hoverBackgroundColor: '#4bf259',
+                                hoverBorderColor: '#4bf259',
                                 borderWidth: 3,
                                 fill: false,
                                 fontSize: 48,
@@ -142,7 +152,8 @@
                                 },
                                 tooltips: {
                                     titleFontSize: 40,
-                                    bodyFontSize: 40
+                                    bodyFontSize: 40,
+                                    mode: 'point'
                                 },
                                 responsive: true,
                                 maintainAspectRatio: true
