@@ -10,10 +10,10 @@ var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-		labels: ['Normaal', 'Warm', 'vorst', 'Regenachtig'],
+		labels: ['Normaal', 'Warm', 'Vorst', 'Regenachtig'],
         datasets: [{
 			label: 'NS',
-            data: [11.5, 40, 33.5, 26],
+            data: [0, 28.5, 22, 14.5],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -40,3 +40,8 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
+<p>Deze grafiek laat, ter behulp van de hoofdvraag, zien hoe verschillende weersscenario's de vertraging van de NS beinvloeden.<br />
+	Voor de situatie "Normaal" hebben wij een temperatuur van rond de 15 graden Celsius genomen, hierbij is er een vertraging van 11,5 uur.<br />
+	We hebben gekozen om de verschillende weersscenario's te vergelijken met de normale weerssituatie, ipv het gemiddelde van 27,75 uur,<br /> 
+	omdat dit het effect van de verschillende filters op de homepagina duidelijker maakt.<br />
+	<i>Tot onze verassing bleek de vertraging het hoogst op te lopen op de warmere dagen, waar de temperatuur boven de 20 graden Celsius kwam. </i></p>
