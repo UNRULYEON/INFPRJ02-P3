@@ -3,7 +3,7 @@
 @model FilterOptions
 
 @{
-    ViewBag.Title = "MigratieAchtergrond";
+    ViewBag.Title = "Wat is de arbeidsdeelname per migratie achtergrond?";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -128,28 +128,45 @@
                                 fill: false,
                                 fontSize: 48,
                                 data: values[4]
-                            }],
+                            }]
+                    
+                    },
                     options:
                     {
-                        title: {
-                            display: true,
-                            text: 'Chart.js Line Chart - Logarithmic'
-                        },
+
                         legend: {
                             labels: {
                                 // This more specific font property overrides the global property
-                                fontSize: 40
+                                fontSize: 20
                             }
                         },
                         tooltips: {
-                            titleFontSize: 40,
-                            bodyFontSize: 40
+                            titleFontSize: 20,
+                            bodyFontSize: 20
                         },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    // Include a dollar sign in the ticks
+                                    callback: function(value, index, values) {
+                                        return '' + value;
+                                    }
+                                },
+                                // Label Y-axis     
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'x1000'
+                                },
+                            }],
+
+                        },
+                        
+
+                        
                         responsive: true,
                         maintainAspectRatio: true
                         
                     }
-                }
                     });
         }
 
