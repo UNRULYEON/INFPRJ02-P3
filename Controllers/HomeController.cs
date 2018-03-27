@@ -15,23 +15,23 @@ namespace INFPRJ02_P3.Controllers
             return View();
         }
 
-        public IActionResult oSubteamOne()
+        public IActionResult Criminaliteit()
         {
-            ViewData["Message"] = "Subteam 1.";
+            ViewData["Message"] = "Criminaliteit.";
 
             return View();
         }
 
-        public IActionResult oSubteamTwo()
+        public IActionResult Recreatie()
         {
-            ViewData["Message"] = "Subteam 2.";
+            ViewData["Message"] = "Recreatie";
 
             return View();
         }
 
-        public IActionResult oSubteamThree()
+        public IActionResult Luchtkwaliteit()
         {
-            ViewData["Message"] = "Subteam 3.";
+            ViewData["Message"] = "Luchtkwaliteit";
 
             return View();
         }
