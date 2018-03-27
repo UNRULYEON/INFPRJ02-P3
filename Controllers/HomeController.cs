@@ -29,13 +29,6 @@ namespace INFPRJ02_P3.Controllers
             return View();
         }
 
-        public IActionResult oSubteamThree()
-        {
-            ViewData["Message"] = "Subteam 3.";
-
-            return View();
-        }
-
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
