@@ -37,21 +37,18 @@
 
 <div class="filter-container">
   <h3>Filters</h3>
+  <p>Weer</p>
   <div class="form-check">
     <input type="checkbox" class="form-check-input" id="checkbox1">
-    <label class="form-check-label" id="checkbox1" for="checkbox1" value="checkbox1" onclick="checkboxTrigger(0)">Checkbox 1</label>
+    <label class="form-check-label" id="checkbox1" for="checkbox1" value="checkbox1" onclick="checkboxTrigger(0)">Warm</label>
   </div>
     <div class="form-check">
     <input type="checkbox" class="form-check-input" id="checkbox2">
-    <label class="form-check-label" id="checkbox2" for="checkbox2" value="checkbox2" onclick="checkboxTrigger(1)">Checkbox 2</label>
+    <label class="form-check-label" id="checkbox2" for="checkbox2" value="checkbox2" onclick="checkboxTrigger(1)">Vorst</label>
   </div>
     <div class="form-check">
     <input type="checkbox" class="form-check-input" id="checkbox3">
-    <label class="form-check-label" id="checkbox3" for="checkbox3" value="checkbox3" onclick="checkboxTrigger(2)">Checkbox 3</label>
-  </div>
-    <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox4">
-    <label class="form-check-label" id="checkbox4" for="checkbox4" value="checkbox4" onclick="checkboxTrigger(3)">Checkbox 4</label>
+    <label class="form-check-label" id="checkbox3" for="checkbox3" value="checkbox3" onclick="checkboxTrigger(2)">Regen</label>
   </div>
 </div>
 
@@ -70,7 +67,7 @@
   // This dataset is the data from NS and File and will always be rendered
   var datasetArray = [{
     label: 'Gemiddeld minuten vertraging',
-    data: [12, 19],
+    data: [11.5, 20],
     backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(255, 99, 132, 0.2)',
@@ -200,23 +197,6 @@
         borderWidth: 2
       });
     };
-
-    // Dataset 4 - Push dataset 1 to the array if the checkbox is true
-    if (checkedBoxes[3]){
-      datasetArray.push({
-        label: 'dataset4',
-        data: [4, 4],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(255,99,132,1)',
-        ],
-        borderWidth: 2
-      });
-    };
     console.log(datasetArray);
 
     // Creates the new chart with the specified data
@@ -264,17 +244,6 @@
         } else {
           // Checkbox 1 - Checked
           checkedBoxes[2] = true;
-          console.log(checkedBoxes);
-        }
-        break;
-      case 3:
-        if (checkedBoxes[3]){
-          // Checkbox 1 - Unchecked
-          checkedBoxes[3] = false;
-          console.log(checkedBoxes);
-        } else {
-          // Checkbox 1 - Checked
-          checkedBoxes[3] = true;
           console.log(checkedBoxes);
         }
         break;
