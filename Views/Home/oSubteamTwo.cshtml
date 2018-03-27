@@ -1,9 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Subteam 2 recreatie";
+    ViewData["Title"] = "Recreatie";
 }
 <h2>@ViewData["Title"]</h2>
 
-<h1>Op welke manier wordt het aantal vertragingen in uren bij de NS beïnvloed door het weer? </h1>
+<h1>Beïnvloedt de nabijheid van recreationele voorzieningen de huizenprijzen in de regio Rotterdam? </h1>
+<div class="filter-container">
+    <h3>Filters</h3>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="checkbox1">
+        <label class="form-check-label" id="checkbox1" for="checkbox1" value="checkbox1" onclick="checkboxTrigger(0)">Checkbox 1</label>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="checkbox2">
+        <label class="form-check-label" id="checkbox2" for="checkbox2" value="checkbox2" onclick="checkboxTrigger(1)">Checkbox 2</label>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="checkbox3">
+        <label class="form-check-label" id="checkbox3" for="checkbox3" value="checkbox3" onclick="checkboxTrigger(2)">Checkbox 3</label>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="checkbox4">
+        <label class="form-check-label" id="checkbox4" for="checkbox4" value="checkbox4" onclick="checkboxTrigger(3)">Checkbox 4</label>
+    </div>
+</div>
+
 <canvas id="myChart" width="400" height="150"></canvas>
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
@@ -40,8 +60,3 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
-<p>Deze grafiek laat, ter behulp van de hoofdvraag, zien hoe verschillende weersscenario's de vertraging van de NS beinvloeden.<br />
-	Voor de situatie "Normaal" hebben wij een temperatuur van rond de 15 graden Celsius genomen, hierbij is er een vertraging van 11,5 uur.<br />
-	We hebben gekozen om de verschillende weersscenario's te vergelijken met de normale weerssituatie, ipv het gemiddelde van 27,75 uur,<br /> 
-	omdat dit het effect van de verschillende filters op de homepagina duidelijker maakt.<br />
-	<i>Tot onze verassing bleek de vertraging het hoogst op te lopen op de warmere dagen, waar de temperatuur boven de 20 graden Celsius kwam. </i></p>
