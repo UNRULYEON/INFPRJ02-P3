@@ -4,11 +4,13 @@
 
 
 <style>
-  .chart-container {
+  #chart-container {
+    display: inline-block;
     position: relative;
     margin: auto;
-    height: 20vh;
-    width: 80vw;
+    height: auto;
+    width: 100%;
+    z-index: 5;
   }
 
   .filter-container{
@@ -20,15 +22,123 @@
     padding: 0 20px 15px;
   }
 
+  .chart-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFF;
+    z-index: -10;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .chart-overlay-active{
+    z-index: 10 !important;
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+  }
+
   #chart{
     width: 100% !important;
-    height: 100%!important;
+    height: 100% !important;
+    background-color: #FFFFFF;
   }
   
   @@media screen and (max-width: 767px) {
     .filter-container{
         width: 100%;
     }
+  }
+
+  .spinner
+  {
+    -webkit-animation: rotation 1.35s linear infinite;
+    animation: rotation 1.35s linear infinite;
+    margin: 20px 0;
+  }
+
+  @@-webkit-keyframes rotation
+  {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+  }
+
+  @@keyframes rotation
+  {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+  }
+
+  .circle
+  {
+    stroke-dasharray: 180;
+    stroke-dashoffset: 0;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    -webkit-animation: turn 1.35s ease-in-out infinite;
+    animation: turn 1.35s ease-in-out infinite;
+  }
+
+  @@-webkit-keyframes turn
+  {
+    0% {
+      stroke-dashoffset: 180;
+    }
+
+    50% {
+      stroke-dashoffset: 45;
+      -webkit-transform: rotate(135deg);
+      transform: rotate(135deg);
+    }
+
+    100% {
+      stroke-dashoffset: 180;
+      -webkit-transform: rotate(450deg);
+      transform: rotate(450deg);
+    }
+  }
+
+  @@keyframes turn
+  {
+    0% {
+      stroke-dashoffset: 180;
+    }
+
+    50% {
+      stroke-dashoffset: 45;
+      -webkit-transform: rotate(135deg);
+      transform: rotate(135deg);
+    }
+
+    100% {
+      stroke-dashoffset: 180;
+      -webkit-transform: rotate(450deg);
+      transform: rotate(450deg);
+    }
+  }
+
+  svg {
+    stroke: #f2499d;
   }
 
 </style>
@@ -39,29 +149,54 @@
   <h3>Filters</h3>
   <p>Weer</p>
   <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox1">
-    <label class="form-check-label" id="checkbox1" for="checkbox1" value="checkbox1" onclick="checkboxTrigger(0)">Warm</label>
+    <input type="checkbox" class="form-check-input" id="checkbox1" onclick="checkboxTrigger(0)">
+    <label class="form-check-label" id="checkbox1Label" for="checkbox1" value="checkbox1">Warm</label>
   </div>
     <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox2">
-    <label class="form-check-label" id="checkbox2" for="checkbox2" value="checkbox2" onclick="checkboxTrigger(1)">Vorst</label>
+    <input type="checkbox" class="form-check-input" id="checkbox2" onclick="checkboxTrigger(1)">
+    <label class="form-check-label" id="checkbox2Label" for="checkbox2" value="checkbox2">Vorst</label>
   </div>
     <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox3">
-    <label class="form-check-label" id="checkbox3" for="checkbox3" value="checkbox3" onclick="checkboxTrigger(2)">Regen</label>
+    <input type="checkbox" class="form-check-input" id="checkbox3" onclick="checkboxTrigger(2)">
+    <label class="form-check-label" id="checkbox3Label" for="checkbox3" value="checkbox3">Regen</label>
   </div>
 </div>
 
 <div id="chart-container">
+  <div class="chart-overlay chart-overlay-active">
+    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><br/>
+    Crunching data...
+  </div>
   <canvas id="chart"></canvas>
 </div>
 
 <script>
+  function toggleOverlay() {
+  console.log('Toggling class');
+
+    var element = document.querySelector('.chart-overlay');
+    element.classList.toggle('chart-overlay-active');
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+</script>
+
+<script>
   
   // Gets the reference to the canvas
-  var ctx = document.getElementById("chart");
+  var ctx = document.getElementById("chart").getContext("2d");
 
-  var checkedBoxes = [false, false, false, false];
+  var checkedBoxes = [false, false, false];
+
+  var chart = new Chart(ctx,{
+    type: 'bar',
+    data: {},
+    options: {}
+  });
+  
+  console.log(chart);
 
   // Data dataset 0
   // This dataset is the data from NS and File and will always be rendered
@@ -78,8 +213,6 @@
     ],
     borderWidth: 2
   }]
-
-  console.log(datasetArray)
 
   var data = {
     labels: ["NS", "File"],
@@ -129,29 +262,26 @@
         top: 0,
         bottom: 0
       }
+    },
+    tooltips: {
+      enabled: false
     }
   };
 
-  var chart = new Chart(ctx,{
-    type: 'bar',
-    options: options,
-    data: data
-  });
-
   // This function creates a new chart with the data from the checkboxes which are set on true
-  function createChart(){
-    // Destroy the old chart
-    chart.destroy();
-
-    datasetArray.length = 1;
-    console.log(datasetArray);
-
+  async function createChart(){
     
+    var ctx = document.getElementById("chart").getContext("2d");
+
+    console.log(chart);
+    datasetArray.length = 1;
+    
+    await sleep(500);
     // Dataset 1 - Push dataset 1 to the array if the checkbox is true
     if (checkedBoxes[0]){
       datasetArray.push({
-        label: 'dataset1',
-        data: [30, 23],
+        label: 'Warm',
+        data: [28.5, 23],
         backgroundColor: [
           'rgba(255, 206, 86, 0.2)',
           'rgba(255, 206, 86, 0.2)',
@@ -162,13 +292,15 @@
         ],
         borderWidth: 2
       });
+      console.log("Pushed dataset 1");
     };
 
+    await sleep(500);
     // Dataset 2 - Push dataset 1 to the array if the checkbox is true
     if (checkedBoxes[1]){
       datasetArray.push({
-        label: 'dataset2',
-        data: [2, 16],
+        label: 'Vorst',
+        data: [22, 16],
         backgroundColor: [
           'rgba(75, 192, 192, 0.2)',
           'rgba(75, 192, 192, 0.2)',
@@ -179,13 +311,15 @@
         ],
         borderWidth: 2
       });
+      console.log("Pushed dataset 2");
     };
 
+    await sleep(500);
     // Dataset 3 - Push dataset 1 to the array if the checkbox is true
     if (checkedBoxes[2]){
       datasetArray.push({
-        label: 'dataset3',
-        data: [-10, 13],
+        label: 'Regen',
+        data: [14.5, 13],
         backgroundColor: [
           'rgba(138, 180, 247, 0.2)',
           'rgba(138, 180, 247, 0.2)',
@@ -196,19 +330,43 @@
         ],
         borderWidth: 2
       });
+      console.log("Pushed dataset 3");
     };
+    console.log("Current array: ");
     console.log(datasetArray);
 
+    await sleep(500);
     // Creates the new chart with the specified data
-    var chartNew = new Chart(ctx,{
+    var chart = new Chart(ctx,{
       type: 'bar',
       options: options,
       data: data
     });
+
+    console.log("Created chart");
+    console.log(chart);
+
+    await sleep(1000);
+    document.getElementById("checkbox1").disabled = false;
+    document.getElementById("checkbox2").disabled = false;
+    document.getElementById("checkbox3").disabled = false;
+
+    toggleOverlay();    
   };
 
   // Runs when a checkbox is checked or unchecked
-  function checkboxTrigger(i){
+  async function checkboxTrigger(i){
+
+    var ctx = document.getElementById("chart").getContext("2d");
+
+    console.log(chart);
+
+    toggleOverlay();
+
+    // Disable checkboxes
+    document.getElementById("checkbox1").disabled = true;
+    document.getElementById("checkbox2").disabled = true;
+    document.getElementById("checkbox3").disabled = true;
 
     console.log(checkedBoxes);
 
@@ -250,6 +408,12 @@
     }
     
     // Calls the funtion to create a new chart
+    await sleep(500);
+    // Destroy the old chart
+    chart.destroy();
+    console.log("Deleted chart");
     createChart();
-  }
+  };
+
+  document.onload = createChart();
 </script>
