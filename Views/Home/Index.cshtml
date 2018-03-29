@@ -8,7 +8,7 @@
     display: inline-block;
     position: relative;
     margin: auto;
-    height: auto;
+    height: 700px;
     width: 100%;
     z-index: 5;
   }
@@ -188,15 +188,15 @@
   // Gets the reference to the canvas
   var ctx = document.getElementById("chart").getContext("2d");
 
+  // Array for the checkboxes
   var checkedBoxes = [false, false, false];
 
+  // Creating an empty chart
   var chart = new Chart(ctx,{
     type: 'bar',
     data: {},
     options: {}
   });
-  
-  console.log(chart);
 
   // Data dataset 0
   // This dataset is the data from NS and File and will always be rendered
@@ -252,7 +252,7 @@
     },
     // Animations
     animation: {
-      duration: 0
+      duration: 2000
     },
     // Padding around the chart
     layout: {
@@ -262,20 +262,23 @@
         top: 0,
         bottom: 0
       }
-    },
-    tooltips: {
-      enabled: false
     }
   };
 
   // This function creates a new chart with the data from the checkboxes which are set on true
   async function createChart(){
-    
-    var ctx = document.getElementById("chart").getContext("2d");
-
-    console.log(chart);
+    // Destroyes and re-appends the canvas element in the container
+    $('#chart').remove();
+    $('#chart-container').append('<canvas id="chart"><canvas>');
+    canvas = document.querySelector('#chart');
+    ctx = canvas.getContext('2d');
+    ctx.canvas.width = $('#chart').width(); 
+    ctx.canvas.height = $('#chart').height();
+  
+    // Set array to 1 so the base data remains
     datasetArray.length = 1;
     
+
     await sleep(500);
     // Dataset 1 - Push dataset 1 to the array if the checkbox is true
     if (checkedBoxes[0]){
@@ -346,21 +349,20 @@
     console.log("Created chart");
     console.log(chart);
 
-    await sleep(1000);
+    // Re-enables the checkboxes
+    await sleep(500);
     document.getElementById("checkbox1").disabled = false;
     document.getElementById("checkbox2").disabled = false;
     document.getElementById("checkbox3").disabled = false;
 
+    // Toggles the overlay so it becomes transparant again and with z-index: -10
     toggleOverlay();    
   };
 
   // Runs when a checkbox is checked or unchecked
   async function checkboxTrigger(i){
 
-    var ctx = document.getElementById("chart").getContext("2d");
-
-    console.log(chart);
-
+    // Toggle the overlay so the spinner becomes visible with z-index: 10
     toggleOverlay();
 
     // Disable checkboxes
@@ -412,8 +414,10 @@
     // Destroy the old chart
     chart.destroy();
     console.log("Deleted chart");
+    // Runs function create chart
     createChart();
   };
 
+  // When the page is loaded, run createChart so the chart with the base data is rendered
   document.onload = createChart();
 </script>
