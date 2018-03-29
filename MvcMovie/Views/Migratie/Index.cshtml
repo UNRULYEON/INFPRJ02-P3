@@ -24,7 +24,7 @@
     }
     <input type="submit", value="Search">
 }
-
+<p id="Target"></p>
 @{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -33,6 +33,7 @@
             async: false
         });
         var root = "@ViewData["root"]";
+        var desc = @Html.Raw(Json.Serialize(ViewData["Description"]));
         var Gender = document.getElementById("Gender");
         var Age = document.getElementById("Age").value;
         var Crit = document.getElementById("Crit");
@@ -42,6 +43,11 @@
         var values = [];
         var labels = [];
         var periodes = [];
+        console.log(Crit);
+        for (var key in desc) {
+            if (desc[key].value == Crit.value)
+                document.getElementById('Target').textContent = desc[key].text;
+        }
         for (var entry in filterdata.selectedPeriod) {
             periodes[entry] = filterdata.selectedPeriod[entry].text;
         }
@@ -59,7 +65,7 @@
                     var temp = [];
                     for (var entry in data.value) {
                         temp[entry] = data.value[entry][Crit.value];
-                    }
+                        }
                     values[achtergrond] = temp;
                     labels[achtergrond] = filterdata.selectedMigratieAchtergrond[achtergrond].text; 
                 });
@@ -85,23 +91,23 @@
                     data: {
                         labels: periodes,
                         datasets: [{
-                            label: labels[0],
-                            backgroundColor: "#21166e ",
-                            borderColor: "#21166e ",
-                            borderWidth: 3,
-                            fill: false,
-                            fontSize: 48,
-                            data: values[0]
-                    }, 
-                        {    
-                        label: labels[1],
-                        backgroundColor: "#685ea8 ",
-                        borderColor: "#685ea8 ",
-                        borderWidth: 3,
-                        fill: false,
-                        fontSize: 48,
-                        data: values[1]
-                    }, 
+                                label: labels[0],
+                                backgroundColor: "#21166e ",
+                                borderColor: "#21166e ",
+                                borderWidth: 3,
+                                fill: false,
+                                fontSize: 48,
+                                data: values[0]
+                            }, 
+                            {    
+                                label: labels[1],
+                                backgroundColor: "#685ea8 ",
+                                borderColor: "#685ea8 ",
+                                borderWidth: 3,
+                                fill: false,
+                                fontSize: 48,
+                                data: values[1]
+                            }, 
                             {    
                                 label: labels[2],
                                 backgroundColor: "#f6ff00 ",
@@ -167,13 +173,13 @@
                         maintainAspectRatio: true
                         
                     }
-                    });
+                });
         }
-
     </script>
 }
 <body>  
 <div style="text-align: center" width = "25%" height ="25%">  
     <canvas id="barcanvas"></canvas>  
 </div>  
+<p></p>
 </body>  

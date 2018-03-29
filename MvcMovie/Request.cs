@@ -51,6 +51,16 @@ namespace MvcMovie
             }
             return temp;
         }
+        public static List<SelectListItem> CreateDisc(string source)
+        {
+            var root = GetRequest("https://opendata.cbs.nl/ODataApi/OData/" + source);
+            var temp = new List<SelectListItem>();
+            foreach (var entry in root.Value)
+            {
+                temp.Add(new SelectListItem{ Text = entry.Description, Value = entry.Key});
+            }
+            return temp;
+        }
             public static Root GetRequest(string url)
             {
                 var client = new HttpClient();
