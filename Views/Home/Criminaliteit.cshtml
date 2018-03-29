@@ -3,7 +3,7 @@
     <script src="/js/my.js"></script>
 </head>
 @{
-    ViewData["Title"] = "Recreatie";
+    ViewData["Title"] = "Criminaliteit";
 }
 <style>
     #chart-container {
@@ -138,9 +138,12 @@
     }
 </style>
 
-<h2>@ViewData["Title"]</h2>
+<h2>@ViewData["Title"]
+    
+</h2>
 
-<h1>Beïnvloedt de nabijheid van recreationele voorzieningen de huizenprijzen in de regio Rotterdam? </h1>
+
+<h1>Draagt een hogere criminaliteit bij aan een daling van de huizenprijs?</h1>
 <BR /><BR>
 <!-- Drop-down -->
 <div>
@@ -148,9 +151,9 @@
         <option value="">Selecteer een regio</option>
         <option value="Centrum">Centrum</option>
         <option value="Charlois">Charlois</option>
-        <option value="2">...</option>
-        <option value="3">...</option>
-        <option value="4">...</option>
+        <option value="2">Regio3</option>
+        <option value="3">Regio4</option>
+        <option value="4">Regio5</option>
     </select>
 </div>
 <div> <button id="run" type="button" onclick="new_page()">Run</button> </div>
