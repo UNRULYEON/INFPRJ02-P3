@@ -146,10 +146,10 @@
 <!-- Drop-down -->
 <div>
     <select id="chart-selector" name="chart-selector">
-        <option value="">Selecteer een regio</option>
+        <option value="">Kies een regio</option>
         <option value="Centrum">Centrum</option>
         <option value="Charlois">Charlois</option>
-        <option value="2">Noord</option>
+        <option value="Noord">Noord</option>
     </select>
 </div>
 <div> <button id="run" type="button" onclick="new_page()">Selecteer</button> </div>
@@ -158,7 +158,7 @@
     function new_page() {
         var e = document.getElementById("chart-selector");
         var strUser = e.options[e.selectedIndex].value;
-        window.location.href = "/Home/Recreatie" + strUser;
+        window.location.href = "/Home/Criminaliteit" + strUser;
 
         }
 </script>
@@ -168,22 +168,14 @@
     <p></p>
     <div class="form-check">
         <input type="checkbox" class="form-check-input" id="checkbox1" onclick="checkboxTrigger(0)">
-        <label class="form-check-label" id="checkbox1Label" for="checkbox1" value="checkbox1">Warenhuis</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox2" onclick="checkboxTrigger(1)">
-        <label class="form-check-label" id="checkbox2Label" for="checkbox2" value="checkbox2">Bibliotheek</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox3" onclick="checkboxTrigger(2)">
-        <label class="form-check-label" id="checkbox3Label" for="checkbox3" value="checkbox3">Zwembad</label>
+        <label class="form-check-label" id="checkbox1Label" for="checkbox1" value="checkbox1">Criminaliteit</label>
     </div>
 </div>
 
 <div id="chart-container">
     <div class="chart-overlay chart-overlay-active">
         <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><br />
-        Crunching data...
+        Data loading...
     </div>
     <canvas id="chart"></canvas>
 </div>
@@ -220,7 +212,7 @@
     // This dataset is the data from houseprices and street
     var datasetArray = [{
         label: 'Huisprijs',
-        data: [11.5, 20],
+        data: [18.52, 16.43, 26.79, 13.79, 21.27],
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(255, 99, 132, 0.2)',
@@ -233,7 +225,7 @@
     }]
     //hier zet je de straat namen
     var data = {
-        labels: ["Cool", "CS-kwartier", "Nieuwe Werk / Dijkzigt", "Oude Westen"],
+        labels: ["Cool", "CS-kwartier", "Nieuwe Werk / Dijkzigt", "Oude Westen", "Stadsdriehoek"],
         datasets: datasetArray
     };
 

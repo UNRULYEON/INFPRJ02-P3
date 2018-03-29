@@ -141,317 +141,174 @@
 <h2>@ViewData["Title"]</h2>
 
 <h1>Beïnvloedt de nabijheid van recreationele voorzieningen de huizenprijzen in de regio Rotterdam? </h1>
-<BR /><BR>
+<BR /><BR><br />
 <!-- Drop-down -->
 <div>
     <select id="chart-selector" name="chart-selector">
         <option value="">Selecteer een regio</option>
         <option value="Centrum">Centrum</option>
         <option value="Charlois">Charlois</option>
-        <option value="2">...</option>
-        <option value="3">...</option>
-        <option value="4">...</option>
+        <option value="Delfshaven">Delfshaven</option>
+        <option value="Feijenoord">Feijenoord</option>
+        <option value="HillegersebergSchiebroek">Hillegersberg-Schiebroek</option>
+        <option value="Ijselmonde">IJsselmonde</option>
+        <option value="KralingenCrooswijk">Kralingen-Crooswijk</option>
+        <option value="Noord">Noord</option>
+        <option value="Overschie">Overschie</option>
+        <option value="PrinsAlexander">Prins Alexander</option>
     </select>
 </div>
-<div> <button id="run" type="button" onclick="new_page()">Run</button> </div>
+<br />
+<div> <button id="run" type="button" onclick="new_page()">Maak diagram</button> </div>
 
 <script>
     function new_page() {
         var e = document.getElementById("chart-selector");
         var strUser = e.options[e.selectedIndex].value;
         window.location.href = "/Home/Recreatie" + strUser;
-
         }
 </script>
-
-<div class="filter-container">
-    <h3>Filters</h3>
-    <p></p>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox1" onclick="checkboxTrigger(0)">
-        <label class="form-check-label" id="checkbox1Label" for="checkbox1" value="checkbox1">Warenhuis</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox2" onclick="checkboxTrigger(1)">
-        <label class="form-check-label" id="checkbox2Label" for="checkbox2" value="checkbox2">Bibliotheek</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox3" onclick="checkboxTrigger(2)">
-        <label class="form-check-label" id="checkbox3Label" for="checkbox3" value="checkbox3">Zwembad</label>
-    </div>
-</div>
-
-<div id="chart-container">
-    <div class="chart-overlay chart-overlay-active">
-        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><br />
-        Crunching data...
-    </div>
-    <canvas id="chart"></canvas>
-</div>
-<script>
-    function toggleOverlay() {
-        console.log('Toggling class');
-
-        var element = document.querySelector('.chart-overlay');
-        element.classList.toggle('chart-overlay-active');
-    }
-
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-</script>
-
-
-
-<script>
-    // Gets the reference to the canvas
-    var ctx = document.getElementById("chart").getContext("2d");
-
-    var checkedBoxes = [false, false, false];
-
-    var chart = new Chart(ctx, {
-        type: 'bar',
-        data: {},
-        options: {}
-    });
-
-    console.log(chart);
-
-    // Data dataset 0
-    // This dataset is the data from houseprices and street
-    var datasetArray = [{
-        label: 'Huisprijs',
-        data: [11.5, 20],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-        ],
-        borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-        ],
-        borderWidth: 2
-    }]
-    //hier zet je de straat namen
-    var data = {
-        labels: ["Cool", "CS-kwartier", "Nieuwe Werk / Dijkzigt", "Oude Westen"],
-        datasets: datasetArray
-    };
-
-    var options = {
-        // Doesn't maintain the original aspect ratio when resizing
-        maintainAspectRatio: false,
-        scales: {
-            xAxes: [{
-                // Label X-axis
-                scaleLabel: {
-                    display: false,
-                    //labelString: ''
-                },
-                stacked: true
-            }],
-            yAxes: [{
-                ticks: {
-                    // Y-axis starts at zero
-                    beginAtZero: true,
-                    // Maximum of the Y-axis
-                    //max: 5,
-                    // Minimum of the Y-axis
-                    min: 0,
-                    // How big the increment is
-                    stepSize: 1
-                },
-                // Label Y-axis
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Gemiddelde woningwaarde in euro (x 10.000)'
-                },
-                stacked: false
-            }]
-        },
-        // Animations
-        animation: {
-            duration: 0
-        },
-        // Padding around the chart
-        layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        },
-        tooltips: {
-            enabled: true,
-            titleFontSize: 16,
-            bodyFontSize: 14,
-            displayColors: false,
-            yAlign: 'bottom'
-        }
-    };
-
-    // This function creates a new chart with the data from the checkboxes which are set on true
-    async function createChart() {
-
-        var ctx = document.getElementById("chart").getContext("2d");
-
-        console.log(chart);
-        datasetArray.length = 1;
-
-        await sleep(500);
-        // Dataset 1 - Push dataset 1 to the array if the checkbox is true
-        if (checkedBoxes[0]) {
-            datasetArray.push({
-                label: 'warenhuis',
-                data: [0.90, 0.80, 0.60, 0.50, 1.60],
-                backgroundColor: [
-                    'rgba(0, 0, 0, 0)'
-                ],
-                borderColor: [
-                    'rgba(255, 206, 86, 1)'
-                ],
-                borderWidth: 3,
-                pointBackgroundColor: 'rgba(255, 255, 255, 1)',
-                pointBorderColor: 'rgba(255, 206, 86, 1)',
-                pointBorderWidth: 2,
-                pointRadius: 5,
-                pointHoverRadius: 7,
-                type: 'line'
-            });
-            console.log("Pushed dataset 1");
-        };
-
-        await sleep(500);
-        // Dataset 2 - Push dataset 1 to the array if the checkbox is true
-        if (checkedBoxes[1]) {
-            datasetArray.push({
-                label: 'Bibliotheek',
-                data: [0.90, 0.80, 0.60, 0.50, 1.60],
-                backgroundColor: [
-                    'rgba(0, 0, 0, 0)'
-                ],
-                borderColor: [
-                    'rgba(255, 206, 86, 1)'
-                ],
-                borderWidth: 3,
-                pointBackgroundColor: 'rgba(255, 255, 255, 1)',
-                pointBorderColor: 'rgba(255, 206, 86, 1)',
-                pointBorderWidth: 2,
-                pointRadius: 5,
-                pointHoverRadius: 7,
-                type: 'line'
-
-            });
-            console.log("Pushed dataset 2");
-        };
-
-        await sleep(500);
-        // Dataset 3 - Push dataset 1 to the array if the checkbox is true
-        if (checkedBoxes[2]) {
-            datasetArray.push({
-                label: 'zwembad',
-                data: [0.50, 0.70, 1.70, 0.90, 2.30],
-                backgroundColor: [
-                    'rgba(0, 0, 0, 0)'
-                ],
-                borderColor: [
-                    'rgba(255, 206, 86, 1)'
-                ],
-                borderWidth: 3,
-                pointBackgroundColor: 'rgba(255, 255, 255, 1)',
-                pointBorderColor: 'rgba(255, 206, 86, 1)',
-                pointBorderWidth: 2,
-                pointRadius: 5,
-                pointHoverRadius: 7,
-                type: 'line'
-
-            });
-            console.log("Pushed dataset 3");
-        };
-        console.log("Current array: ");
-        console.log(datasetArray);
-
-        await sleep(500);
-        // Creates the new chart with the specified data
-        var chart = new Chart(ctx, {
-            type: 'bar',
-            options: options,
-            data: data
-        });
-
-        console.log("Created chart");
-        console.log(chart);
-
-        await sleep(1000);
-        document.getElementById("checkbox1").disabled = false;
-        document.getElementById("checkbox2").disabled = false;
-        document.getElementById("checkbox3").disabled = false;
-
-        toggleOverlay();
-    };
-
-    // Runs when a checkbox is checked or unchecked
-    async function checkboxTrigger(i) {
-
-        var ctx = document.getElementById("chart").getContext("2d");
-
-        console.log(chart);
-
-        toggleOverlay();
-
-        // Disable checkboxes
-        document.getElementById("checkbox1").disabled = true;
-        document.getElementById("checkbox2").disabled = true;
-        document.getElementById("checkbox3").disabled = true;
-
-        console.log(checkedBoxes);
-
-        switch (i) {
-            // Checkbox 1
-            case 0:
-                if (checkedBoxes[0]) {
-                    // Checkbox 1 - Unchecked
-                    checkedBoxes[0] = false;
-                    console.log(checkedBoxes);
-                } else {
-                    // Checkbox 1 - Checked
-                    checkedBoxes[0] = true;
-                    console.log(checkedBoxes);
-                }
-                break;
-            case 1:
-                if (checkedBoxes[1]) {
-                    // Checkbox 1 - Unchecked
-                    checkedBoxes[1] = false;
-                    console.log(checkedBoxes);
-                } else {
-                    // Checkbox 1 - Checked
-                    checkedBoxes[1] = true;
-                    console.log(checkedBoxes);
-                }
-                break;
-            case 2:
-                if (checkedBoxes[2]) {
-                    // Checkbox 1 - Unchecked
-                    checkedBoxes[2] = false;
-                    console.log(checkedBoxes);
-                } else {
-                    // Checkbox 1 - Checked
-                    checkedBoxes[2] = true;
-                    console.log(checkedBoxes);
-                }
-                break;
-        }
-
-        // Calls the funtion to create a new chart
-        await sleep(500);
-        // Destroy the old chart
-        chart.destroy();
-        console.log("Deleted chart");
-        createChart();
-    };
-
-    document.onload = createChart();
-</script>
-
+<br /><br /><br /><br />
+<h2>Wijken per regio</h2>
+<br />
+<table style="width:100%" id="recreatie">
+    <tr>
+        <th>Centrum</th>
+        <th>Charlois</th>
+        <th>Delfshaven</th>
+        <th>Feijenoord</th>
+        <th>Hillegersberg-Schiebroek</th>
+    </tr>
+    <tr>
+        <td>Cool</td>
+        <td>Carnisse</td>
+        <td>Bospolder</td>
+        <td>Afrikaanderwijk</td>
+        <td>Hillegersberg Noord</td>
+    </tr>
+    <tr>
+        <td>CS-kwartier</td>
+        <td>Heijplaat</td>
+        <td>Delfshaven</td>
+        <td>Bloemhof</td>
+        <td>Hillegersberg Zuid</td>
+    </tr>
+    <tr>
+        <td>Nieuwe Werk/Dijkzigt</td>
+        <td>Oud-Charlois</td>
+        <td>Middelland</td>
+        <td>Feijenoord</td>
+        <td>Molenlaankwartier</td>
+    </tr>
+    <tr>
+        <td>Oude Westen</td>
+        <td>Pendrecht</td>
+        <td>Nieuwe Westen</td>
+        <td>Hillesluis</td>
+        <td>Schiebroek</td>
+    </tr>
+    <tr>
+        <td>Stadsdriehoek</td>
+        <td>Tarwewijk</td>
+        <td>Oud Mathenesse/Witte Dorp</td>
+        <td>Katendrecht</td>
+        <td>Terbregge</td>
+    </tr>
+    <tr>
+        <td> </td>
+        <td>Wielewaal</td>
+        <td>Schiemond</td>
+        <td>Kop van Zuid</td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td> </td>
+        <td>Zuiderpark en Zuidrand</td>
+        <td>Spangen</td>
+        <td>Kop van Zuid - Entrepot</td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td> </td>
+        <td>Zuidplein</td>
+        <td>Tussendijken</td>
+        <td>Noordereiland</td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td> </td>
+        <td>Zuidwijk</td>
+        <td> </td>
+        <td>Vreewijk</td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td><br /></td>
+    </tr>
+    <tr>
+        <td><br /></td>
+    </tr>
+    <tr>
+        <th>IJsselmonde</th>
+        <th>Kralingen-Crooswijk</th>
+        <th>Noord</th>
+        <th>Overschie</th>
+        <th>Prins Alexander</th>
+    </tr>
+    <tr>
+        <td>Beverwaard</td>
+        <td>De Esch</td>
+        <td>Agniesebuurt</td>
+        <td>Kleinpolder</td>
+        <td>Het Lage Land</td>
+    </tr>
+    <tr>
+        <td>Groot IJsselmonde-Noord</td>
+        <td>Nieuw Crooswijk</td>
+        <td>Bergpolder</td>
+        <td>Noord Kethel/Schieveen/Zestienhoven</td>
+        <td>Kralingseveer</td>
+    </tr>
+    <tr>
+        <td>Groot IJsselmonde-Zuid</td>
+        <td>Kralingen Oost/Kralingse Bos</td>
+        <td>Blijdorp/Blijdorpsepolder</td>
+        <td>Overschie</td>
+        <td>Nesselande</td>
+    </tr>
+    <tr>
+        <td>Lombardijen</td>
+        <td>Kralingen West</td>
+        <td>Liskwartier</td>
+        <td> </td>
+        <td>Ommoord</td>
+    </tr>
+    <tr>
+        <td>Oud IJsselmonde</td>
+        <td>Oud Crooswijk</td>
+        <td>Oude Noorden</td>
+        <td> </td>
+        <td>Oosterflank</td>
+    </tr>
+    <tr>
+        <td> </td>
+        <td>Rubroek</td>
+        <td>Provenierswijk</td>
+        <td> </td>
+        <td>Prinsenland</td>
+    </tr>
+    <tr>
+        <td> </td>
+        <td>Struisenburg</td>
+        <td> </td>
+        <td> </td>
+        <td>'s-Gravenland</td>
+    </tr>
+    <tr>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td>Zevenkamp</td>
+    </tr>
+</table>
