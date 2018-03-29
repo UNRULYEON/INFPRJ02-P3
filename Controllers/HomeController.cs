@@ -52,6 +52,42 @@ namespace INFPRJ02_P3.Controllers
 
             return View();
         }
+        public IActionResult RecreatieHillegersebergSchiebroek()
+        {
+            ViewData["Message"] = "RecreatieHillegersebergSchiebroek";
+
+            return View();
+        }
+        public IActionResult RecreatieIjselmonde()
+        {
+            ViewData["Message"] = "RecreatieIjselmonde";
+
+            return View();
+        }
+        public IActionResult RecreatieKralingenCrooswijk()
+        {
+            ViewData["Message"] = "RecreatieKralingenCrooswijk";
+
+            return View();
+        }
+        public IActionResult RecreatieNoord()
+        {
+            ViewData["Message"] = "RecreatieNoord";
+
+            return View();
+        }
+        public IActionResult RecreatieOverschie()
+        {
+            ViewData["Message"] = "RecreatieOverschie";
+
+            return View();
+        }
+        public IActionResult RecreatiePrinsAlexander()
+        {
+            ViewData["Message"] = "RecreatiePrinsAlexander";
+
+            return View();
+        }
 
 
         public IActionResult Luchtkwaliteit()
