@@ -3,7 +3,7 @@
 @model Deelvraag1FilterOptions
 
 @{
-    ViewBag.Title = "Jongeren";
+    ViewBag.Title = "Hoe is de werkgelegenheid geregeld in Nederland voor jongeren?";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -11,20 +11,25 @@
 {
     if (@ViewData["Filters"] is Deelvraag1FilterOptions filter)
     {
+        
+        
+        @Html.DropDownListFor(m => m.Kenmerkenwerknemer, filter.SelectedKenmerkenwerknemer, "Kenmerkenwerknemer", 
+            new { id="Kenmerkenwerknemer"}) <br>                                   
        
+        @Html.DropDownListFor(m => m.Criteria, filter.SelectedCriteria, "Criteria", 
+            new { id="Crit"}) <br>                                                                                           
         
-        @Html.DropDownListFor(m => m.Regio, filter.SelectedRegio, "Geslacht", 
-            new { id="regio"}) <br>
-                                                                                                  
-        @Html.DropDownListFor(m => m.Bedrijfstak, filter.SelectedBedrijfstak, "Leeftijd", 
-            new { id="bedrijf"}) <br>
+        @*@Html.DropDownListFor(m => m.Sector, filter.SelectedSector, "Sector", 
+            new { id="Sector"}) <br>@*@
         
-        @Html.DropDownListFor(m => m.Period, filter.SelectedPeriod, "Perioden", 
-            new { id="Period"}) <br>
-                                                                                                              
+        
+    
+                        
+                                                                                 
     }
     <input type="submit", value="Search">
 }
+
 
 @{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
@@ -33,66 +38,123 @@
         $.ajaxSetup({
             async: false
         });
-        @* Fix this garbage *@
         var root = "@ViewData["root"]";
-        var regio = document.getElementById("regio").value;
-        var Period = document.getElementById("Period").value;
-        var bedrijf = document.getElementById("bedrijf");
-        var querystring = root + "$filter=RegioS eq " + "'" +regio + "'" +
-            " and " + "BedrijfstakkenBranchesSBI2008 eq " + "'" + bedrijf.value + "'" +
-            " and " + "Perioden eq " + "'" + Period + "'";
+        //var Kenmerkenwerknemer1 = document.getElementById("Kenmerkenwerknemer1");
+        //var Period = document.getElementById("Period");
+        var Kenmerkenwerknemer = document.getElementById("Kenmerkenwerknemer").value;
+        var Crit = document.getElementById("Crit");
+        var Coasector = document.getElementById("Coasector");
+        var filterdata = @Html.Raw(Json.Serialize(ViewData["filters"]));
         var values = [];
-        console.log(bedrijf.value);
-        @* Fix this garbage *@
-        var one = $.get(
-            querystring,
-            function(data) {
-                console.log(data.value);
-                values[0] = data.value[0].OpenstaandeVacatures_1;
-                values[1] = data.value[0].OpenstaandeVacatures_1;     
-            });
-
-        
+        var labels = [];
+        var periodes = [];
+        for (var entry in filterdata.selectedPerioden) {
+            periodes[entry] = filterdata.selectedPerioden[entry].text;
+        }
+        function createQuerystring(arg) {
+            var temp = root + "$filter=endswith(Perioden,'JJ00') eq true and KenmerkenWerknemer eq " + "'" + Kenmerkenwerknemer + "'" + 
+                " and "  + "CaoSector eq"  +  "'" + arg + "'" ;
+            console.log("Temp is hier fucker: " + temp);
+            return temp;
+        }
+        for (var achtergrond in filterdata.selectedCoasector) {
+            var one = $.get(
+                createQuerystring(filterdata.selectedCoasector[achtergrond].value),
+                function(data) {
+                    var temp = [];
+                    
+                    for (var entry in data.value) {
+                        temp[entry] = data.value[entry][Crit.value];
+                        
+                    } 
+                    values[achtergrond] = temp;
+                    labels[achtergrond] = filterdata.selectedCoasector[achtergrond].text; 
+                });
+        }
         var barChartData = {
-            labels: ["5", "3"],
+            labels: periodes,
             datasets: [{
-                label: 'Dataset 1',
-                backgroundColor: ["#b994a7","#fff2a7"],
-                borderWidth: 1,
+                label: labels,
+                backgroundColor: "#21166e ",
+                borderColor: "#21166e ",
+                borderWidth: 18,
+                fill: false,
                 fontSize: 48,
                 data: values
             }]
         };
-        window.onload = function() {
+        console.log(values);
+        window.onload = function () {
             var ctx1 = document.getElementById("barcanvas").getContext("2d");
             window.myBar = new Chart(ctx1,
                 {
-                    type: 'pie',
-                    data: barChartData,
-                    options:
-                    {
-                        title:
-                        {
+                    type: 'line',
+                    data: {
+                        labels: periodes,
+                        datasets: [{
+                            label: labels[0],
+                            backgroundColor: "#21166e ",
+                            borderColor: "#21166e ",
+                            borderWidth: 3,
+                            fill: false,
                             fontSize: 48,
-                            display: true,
-                            text: "test" + " x1000"
+                            data: values[0]
                         },
-                        legend: {
-                            labels: {
-                                // This more specific font property overrides the global property
-                                fontSize: 40
+                        {
+                            label: labels[1],
+                            backgroundColor: "#685ea8 ",
+                            borderColor: "#685ea8 ",
+                            borderWidth: 3,
+                            fill: false,
+                            fontSize: 48,
+                            data: values[1]
+                        },
+                        {
+                            label: labels[2],
+                            backgroundColor: "#f6ff00 ",
+                            borderColor: "#f6ff00 ",
+                            borderWidth: 3,
+                            fill: false,
+                            fontSize: 48,
+                            data: values[2]
+                            },
+                            {
+                                label: labels[3],
+                                backgroundColor: "#f2499cd ",
+                                borderColor: "#f2499cd ",
+                                borderWidth: 3,
+                                fill: false,
+                                fontSize: 48,
+                                data: values[3]
+                            },
+                            {
+                             
+                            },],
+                        options:
+                            {
+                                title: {
+                                    display: true,
+                                    text: 'Chart.js Line Chart - Logarithmic'
+                                },
+                                legend: {
+                                    labels: {
+                                        // This more specific font property overrides the global property
+                                        fontSize: 40
+                                    }
+                                },
+                                tooltips: {
+                                    titleFontSize: 40,
+                                    bodyFontSize: 40
+                                },
+                                responsive: true,
+                                maintainAspectRatio: true
+
                             }
-                        },
-                        responsive: true,
-                        maintainAspectRatio: true
-                        
                     }
                 });
         }
     </script>
 }
-<body>  
-<div style="text-align: center" width = "25%" height ="25%">  
-    <canvas id="barcanvas"></canvas>  
-</div>  
-</body>  
+<body> 
+    <canvas id="barcanvas"></canvas>   
+</body>
