@@ -55,92 +55,90 @@
     }
   }
 
-  .spinner
-  {
-    -webkit-animation: rotation 1.35s linear infinite;
-    animation: rotation 1.35s linear infinite;
+  .spinner-wrapper {
+    position: relative;
+    width: 4em;
+    height: 4em;
+    border-radius: 100%;
+    left: calc(50% - 2em);
     margin: 20px 0;
   }
 
-  @@-webkit-keyframes rotation
-  {
+  .spinner-wrapper::after {
+    content: "";
+    background: #fff;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+  } 
+
+  .rotator {
+    position: relative;
+    width: 4em;
+    border-radius: 4em;
+    overflow: hidden;
+    animation: rotate 2000ms infinite linear;
+  }
+
+  .rotator:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f2499d;
+    border: 3px solid #fff;
+    border-radius: 100%;
+  }
+
+  .inner-spin {
+    background: #fff;
+    height: 4em;
+    width: 2em;
+  }
+
+  .inner-spin {
+    animation: rotate-left 2500ms infinite cubic-bezier(0.445, 0.050, 0.550, 0.950);
+    border-radius: 2em 0 0 2em;
+    transform-origin: 2em 2em;
+  }
+
+  .inner-spin:last-child {
+    animation: rotate-right 2500ms infinite cubic-bezier(0.445, 0.050, 0.550, 0.950);
+    margin-top: -4em;
+    border-radius: 0 2em 2em 0;
+    float: right;
+    transform-origin: 0 50%;
+  }
+
+  @@keyframes rotate-left {
+    60%, 75%, 100% {
+        transform: rotate(360deg);
+      }
+  }
+
+  @@keyframes rotate {
     0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-
-    100% {
-      -webkit-transform: rotate(270deg);
-      transform: rotate(270deg);
-    }
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
   }
 
-  @@keyframes rotation
-  {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
+  @@keyframes rotate-right {
+    0%, 25%, 45% {
+        transform: rotate(0);
+      }
 
-    100% {
-      -webkit-transform: rotate(270deg);
-      transform: rotate(270deg);
-    }
+      100% {
+        transform: rotate(360deg);
+      }
   }
-
-  .circle
-  {
-    stroke-dasharray: 180;
-    stroke-dashoffset: 0;
-    -webkit-transform-origin: center;
-    -ms-transform-origin: center;
-    transform-origin: center;
-    -webkit-animation: turn 1.35s ease-in-out infinite;
-    animation: turn 1.35s ease-in-out infinite;
-  }
-
-  @@-webkit-keyframes turn
-  {
-    0% {
-      stroke-dashoffset: 180;
-    }
-
-    50% {
-      stroke-dashoffset: 45;
-      -webkit-transform: rotate(135deg);
-      transform: rotate(135deg);
-    }
-
-    100% {
-      stroke-dashoffset: 180;
-      -webkit-transform: rotate(450deg);
-      transform: rotate(450deg);
-    }
-  }
-
-  @@keyframes turn
-  {
-    0% {
-      stroke-dashoffset: 180;
-    }
-
-    50% {
-      stroke-dashoffset: 45;
-      -webkit-transform: rotate(135deg);
-      transform: rotate(135deg);
-    }
-
-    100% {
-      stroke-dashoffset: 180;
-      -webkit-transform: rotate(450deg);
-      transform: rotate(450deg);
-    }
-  }
-
-  svg {
-    stroke: #f2499d;
-  }
-
 </style>
 
 <h1>Op welke manier wordt de keuze van forenzen tussen de trein en de auto beïnvloed?</h1>
@@ -164,7 +162,13 @@
 
 <div id="chart-container">
   <div class="chart-overlay chart-overlay-active">
-    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><br/>
+    <div class="spinner-wrapper">
+      <div class="rotator">
+        <div class="inner-spin"></div>
+        <div class="inner-spin"></div>
+      </div>
+    </div>
+    <br/>
     Crunching data...
   </div>
   <canvas id="chart"></canvas>
