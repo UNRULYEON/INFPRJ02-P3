@@ -138,14 +138,15 @@
     }
 </style>
 
-<h3>@ViewData["Title"]</h3>
+<h4>@ViewData["Title"] - Beïnvloedt de nabijheid van recreationele voorzieningen de huizenprijzen in de regio Rotterdam?</h4>
 
 <h1>Regio: IJsselmonde</h1>
 <h3>Rotterdam</h3>
-<BR /><BR>
+<BR /><div> <button id="run" type="button" onclick="window.location.href='/Home/Recreatie'">Ga terug naar selectie</button> </div><BR>
 
 <div class="filter-container">
-    <h3>Filters</h3>
+    <h3>Recreationele voorzieningen</h3>
+    <h4>Minimale afstand in km tot:</h4>
     <p></p>
     <div class="form-check">
         <input type="checkbox" class="form-check-input" id="checkbox1" onclick="checkboxTrigger(0)">
@@ -164,7 +165,7 @@
 <div id="chart-container">
     <div class="chart-overlay chart-overlay-active">
         <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><br />
-        Crunching data...
+        Loading...
     </div>
     <canvas id="chart"></canvas>
 </div>
@@ -201,12 +202,18 @@
     // This dataset is the data from houseprices and street
     var datasetArray = [{
         label: 'Huisprijs',
-        data: [11.5, 20],
+        data: [13.48, 15.88, 14.34, 14.17, 17.13],
         backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
             'rgba(255, 99, 132, 0.2)',
             'rgba(255, 99, 132, 0.2)',
         ],
         borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(255,99,132,1)',
+            'rgba(255,99,132,1)',
             'rgba(255,99,132,1)',
             'rgba(255,99,132,1)',
         ],
@@ -244,7 +251,7 @@
                 // Label Y-axis
                 scaleLabel: {
                     display: true,
-                    labelString: 'Gemiddelde woningwaarde in euro (x 10.000)'
+                    labelString: 'Gemiddelde woz-waarde in euro (x 10.000)'
                 },
                 stacked: false
             }]
@@ -283,7 +290,7 @@
         // Dataset 1 - Push dataset 1 to the array if the checkbox is true
         if (checkedBoxes[0]) {
             datasetArray.push({
-                label: 'warenhuis',
+                label: 'Warenhuis (afstand in km)',
                 data: [2.90, 1.40, 1.40, 2.60, 2.20],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
@@ -306,17 +313,17 @@
         // Dataset 2 - Push dataset 1 to the array if the checkbox is true
         if (checkedBoxes[1]) {
             datasetArray.push({
-                label: 'Bibliotheek',
+                label: 'Bibliotheek (afstand in km)',
                 data: [1.20, 1.20, 1.20, 0.90, 2.00],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
                 borderColor: [
-                    'rgba(255, 206, 86, 1)'
+                    'rgba(81, 133, 255, 1)'
                 ],
                 borderWidth: 3,
                 pointBackgroundColor: 'rgba(255, 255, 255, 1)',
-                pointBorderColor: 'rgba(255, 206, 86, 1)',
+                pointBorderColor: 'rgba(81, 133, 255, 1)',
                 pointBorderWidth: 2,
                 pointRadius: 5,
                 pointHoverRadius: 7,
@@ -330,17 +337,17 @@
         // Dataset 3 - Push dataset 1 to the array if the checkbox is true
         if (checkedBoxes[2]) {
             datasetArray.push({
-                label: 'zwembad',
+                label: 'Zwembad (afstand in km)',
                 data: [2.80, 1.60, 1.60, 2.80, 2.00],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
                 borderColor: [
-                    'rgba(255, 206, 86, 1)'
+                    'rgba(66, 217, 2, 1)'
                 ],
                 borderWidth: 3,
                 pointBackgroundColor: 'rgba(255, 255, 255, 1)',
-                pointBorderColor: 'rgba(255, 206, 86, 1)',
+                pointBorderColor: 'rgba(66, 217, 2, 1)',
                 pointBorderWidth: 2,
                 pointRadius: 5,
                 pointHoverRadius: 7,
