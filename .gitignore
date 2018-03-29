@@ -8,3 +8,5 @@ bin/*
 bin/Debug/netcoreapp2.0/INFPRJ02-P3.dll
 bin/Debug/netcoreapp2.0/INFPRJ02-P3.pdb
 bin/Debug/netcoreapp2.0/INFPRJ02-P3.runtimeconfig.dev.json
+
+obj/
