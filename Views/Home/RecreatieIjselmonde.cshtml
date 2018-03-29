@@ -3,7 +3,7 @@
     <script src="/js/my.js"></script>
 </head>
 @{
-    ViewData["Title"] = "Recreatie Ijselmonde";
+    ViewData["Title"] = "Recreatie";
 }
 <style>
     #chart-container {
@@ -138,9 +138,10 @@
     }
 </style>
 
-<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Title"]</h3>
 
-<h1>Rotterdam Ijselmonde</h1>
+<h1>Regio: IJsselmonde</h1>
+<h3>Rotterdam</h3>
 <BR /><BR>
 
 <div class="filter-container">
@@ -213,7 +214,7 @@
     }]
     //hier zet je de straat namen
     var data = {
-        labels: ['Beverwaard', 'Groot Ijsselmonde - Noord', 'Groot Ijsselmonde - Zuid', 'Lombardijen', 'Oud IJsselmonde', ' Kop van Zuid', 'Kop van Zuid - Entrepot', 'Noordereiland', 'Vreewijk'],
+        labels: ['Beverwaard', 'Groot Ijsselmonde - Noord', 'Groot Ijsselmonde - Zuid', 'Lombardijen', 'Oud IJsselmonde'],
         datasets: datasetArray
     };
 

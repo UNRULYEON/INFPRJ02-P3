@@ -3,7 +3,7 @@
     <script src="/js/my.js"></script>
 </head>
 @{
-    ViewData["Title"] = "RecreatieKralingenCrooswijk";
+    ViewData["Title"] = "Recreatie";
 }
 <style>
     #chart-container {
@@ -138,9 +138,10 @@
     }
 </style>
 
-<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Title"]</h3>
 
-<h1>Rotterdam Kralingen Crooswijk</h1>
+<h1>Regio: Kralingen-Crooswijk</h1>
+<h3>Rotterdam</h3>
 <BR /><BR>
 
 <div class="filter-container">
@@ -213,7 +214,7 @@
     }]
     //hier zet je de straat namen
     var data = {
-        labels: ['De Esch', ' Nieuw Crooswijk', 'Kralingen Oost / Kralingse Bos', 'Kralingen West', 'Oud Crooswijk', 'Rubroek', 'Struisenburg', 'Noordereiland', 'Vreewijk'],
+        labels: ['De Esch', ' Nieuw Crooswijk', 'Kralingen Oost / Kralingse Bos', 'Kralingen West', 'Oud Crooswijk', 'Rubroek', 'Struisenburg'],
         datasets: datasetArray
     };
 
