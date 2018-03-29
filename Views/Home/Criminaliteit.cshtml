@@ -3,7 +3,7 @@
     <script src="/js/my.js"></script>
 </head>
 @{
-    ViewData["Title"] = "RecreatieCentrum";
+    ViewData["Title"] = "Recreatie";
 }
 <style>
     #chart-container {
@@ -140,8 +140,29 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<h1>Rotterdam Centrum</h1>
+<h1>Beïnvloedt de nabijheid van recreationele voorzieningen de huizenprijzen in de regio Rotterdam? </h1>
 <BR /><BR>
+<!-- Drop-down -->
+<div>
+    <select id="chart-selector" name="chart-selector">
+        <option value="">Selecteer een regio</option>
+        <option value="Centrum">Centrum</option>
+        <option value="Charlois">Charlois</option>
+        <option value="2">...</option>
+        <option value="3">...</option>
+        <option value="4">...</option>
+    </select>
+</div>
+<div> <button id="run" type="button" onclick="new_page()">Run</button> </div>
+
+<script>
+    function new_page() {
+        var e = document.getElementById("chart-selector");
+        var strUser = e.options[e.selectedIndex].value;
+        window.location.href = "/Home/Recreatie" + strUser;
+
+        }
+</script>
 
 <div class="filter-container">
     <h3>Filters</h3>
@@ -213,10 +234,8 @@
     }]
     //hier zet je de straat namen
     var data = {
-        labels: ["Cool", "CS-kwartier", "Nieuwe Werk / Dijkzigt", "Oude Westen","stadsdriehoek"],
-
+        labels: ["Cool", "CS-kwartier", "Nieuwe Werk / Dijkzigt", "Oude Westen"],
         datasets: datasetArray
-
     };
 
     var options = {
@@ -285,7 +304,7 @@
         if (checkedBoxes[0]) {
             datasetArray.push({
                 label: 'warenhuis',
-                data: [0.60, 0.50, 1.60, 0.80, 0.90],
+                data: [0.90, 0.80, 0.60, 0.50, 1.60],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
@@ -308,7 +327,7 @@
         if (checkedBoxes[1]) {
             datasetArray.push({
                 label: 'Bibliotheek',
-                data: [1.40, 1.70, 2.05, 2.00, 0.70],              
+                data: [0.90, 0.80, 0.60, 0.50, 1.60],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
@@ -332,7 +351,7 @@
         if (checkedBoxes[2]) {
             datasetArray.push({
                 label: 'zwembad',
-                data: [1.50, 0.90, 2.00, 0.80, 1.30],
+                data: [0.50, 0.70, 1.70, 0.90, 2.30],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
@@ -435,3 +454,4 @@
 
     document.onload = createChart();
 </script>
+
