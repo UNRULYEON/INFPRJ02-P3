@@ -20,12 +20,18 @@ namespace Models
 
     public class Deelvraag1FilterOptions
     {
-        public string Bedrijfstak { get; set; }
-        public List<SelectListItem> SelectedBedrijfstak { get; set; }
-        public string Regio{ get; set; }
-        public List<SelectListItem> SelectedRegio { get; set; }
-        public string Period{ get; set; }
-        public List<SelectListItem> SelectedPeriod { get; set; }
+        public string Kenmerkenwerknemer { get; set; }
+        public List<SelectListItem> SelectedKenmerkenwerknemer { get; set; }
+        ///public string Kenmerkenwerknemer1 { get; set; }
+        //public List<SelectListItem> SelectedKenmerkenwerknemer1 { get; set; }
+        public string Perioden { get; set; }
+        public List<SelectListItem> SelectedPerioden { get; set; }
+        public string Criteria{ get; set; }
+        public List<SelectListItem> SelectedCriteria { get; set; }
+        public string Coasector{ get; set; }
+        public List<SelectListItem> SelectedCoasector { get; set; }
+
+        
     }
 
     public class Deelvraag2FilterOptions
