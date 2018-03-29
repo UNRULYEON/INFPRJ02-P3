@@ -28,6 +28,31 @@ namespace INFPRJ02_P3.Controllers
 
             return View();
         }
+        public IActionResult RecreatieCentrum()
+        {
+            ViewData["Message"] = "RecreatieCentrum";
+
+            return View();
+        }
+        public IActionResult RecreatieCharlois()
+        {
+            ViewData["Message"] = "RecreatieCharlois";
+
+            return View();
+        }
+        public IActionResult RecreatieDelfshaven()
+        {
+            ViewData["Message"] = "RecreatieDelfshaven";
+
+            return View();
+        }
+        public IActionResult RecreatieFeijenoord()
+        {
+            ViewData["Message"] = "RecreatieFeijenoord";
+
+            return View();
+        }
+
 
         public IActionResult Luchtkwaliteit()
         {

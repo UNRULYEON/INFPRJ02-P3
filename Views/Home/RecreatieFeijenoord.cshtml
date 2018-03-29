@@ -3,7 +3,7 @@
     <script src="/js/my.js"></script>
 </head>
 @{
-    ViewData["Title"] = "RecreatieCharlois";
+    ViewData["Title"] = "RecreatieFeijenoord";
 }
 <style>
     #chart-container {
@@ -213,7 +213,7 @@
     }]
     //hier zet je de straat namen
     var data = {
-        labels: ['Carnisse', 'Heijplaat', 'Oud Charlois', 'Pendrecht', 'Tarwewijk', 'Wielewaal', 'Zuiderpark en Zuidrand', 'Zuidplein', 'Zuidwijk'],
+        labels: ['Afrikaanderwijk', 'Bloemhof', 'Feijenoord', 'Hillesluis', 'Katendrecht', ' Kop van Zuid', 'Kop van Zuid - Entrepot', 'Noordereiland', 'Vreewijk'],
         datasets: datasetArray
     };
 
@@ -283,7 +283,7 @@
         if (checkedBoxes[0]) {
             datasetArray.push({
                 label: 'warenhuis',
-                data: [1.20, 6.90, 2.20, 2.70, 1.10, 2.80, 2.80, 0.40, 2.30],
+                data: [1.00, 1.20, 1.10, 1.40, 1.70, 1.00, 0.60, 1.90, 1.50],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
@@ -306,7 +306,7 @@
         if (checkedBoxes[1]) {
             datasetArray.push({
                 label: 'Bibliotheek',
-                data: [1.20, 5.60, 0.60, 3.00, 1.40, 1.80, 2.50, 1.40, 2.60],
+                data: [1.70, 0.90, 2.60, 0.90, 3.00, 2.60, 2.30, 2.00, 0.90],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
@@ -330,7 +330,7 @@
         if (checkedBoxes[2]) {
             datasetArray.push({
                 label: 'zwembad',
-                data: [0.90, 6.70, 1.90, 2.50, 0.90, 2.60, 2.80, 0.40, 2.40],
+                data: [0.50, 1.20, 2.90, 1.30, 1.70, 1.70, 1.70, 2.60, 1.80],
                 backgroundColor: [
                     'rgba(0, 0, 0, 0)'
                 ],
