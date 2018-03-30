@@ -162,17 +162,17 @@
     // Data dataset 0
     // This dataset is the data from NS and File and will always be rendered
     var data = {
-        labels: ["A", "B"],
+        labels: ["Afrikaanderwijk", "Bloemhof", "Feijenoord", "Hillesluis", "Katendrecht", "Kop van Zuid", "Kop van Zuid - Entrepot", "Noordereiland", "Vreewijk"],
         datasets: [
             {
                 label: "Huisprijs",
                 backgroundColor: "blue",
-                data: [400, 3500],
+                data: [1109, 1240, 1161, 1127, 1508, 2393, 1674, 1725, 1506],
             },
             {
                 label: "Misdrijf",
                 backgroundColor: "red",
-                data: [660, 2200],
+                data: [830, 1025, 458, 1240, 387, 526, 793, 240, 1291],
             }
         ]
 
@@ -204,7 +204,7 @@
                 // Label Y-axis
                 scaleLabel: {
                     display: true,
-                    labelString: 'Gemiddelde woz-waarde in euro (x 10.000) // Aantal misdrijven'
+                    labelString: 'Gemiddelde woz-waarde in euro (x 100) // Aantal misdrijven'
                 },
                 stacked: false
             }]
