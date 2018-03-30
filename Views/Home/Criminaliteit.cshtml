@@ -87,6 +87,11 @@
         }
     }
 
+    .chart_selector label {
+        margin: 0px 10px;
+        cursor: pointer;
+    }
+
     .circle {
         stroke-dasharray: 180;
         stroke-dashoffset: 0;
@@ -138,69 +143,27 @@
     }
 </style>
 
-
-
 <h2>@ViewData["Title"]</h2>
-
-<div>
-    <select id="chart-selector" name="chart-selector">
-<<<<<<< HEAD
-        <option value="">Selecteer een regio</option>
-        <option value="Centrum">Centrum</option>
-        <option value="Charlois">Charlois</option>
-        <option value="2">Noord</option>
-
-    </select>
-</div>
-<div> <button id="run" type="button" onclick="new_page()">Selecteer</button> </div>
-
-<script>
-    function new_page() {
-        var e = document.getElementById("chart-selector");
-        var strUser = e.options[e.selectedIndex].value;
-        window.location.href = "/Home/Recreatie" + strUser;
-
-        }
-</script>
-
-<div class="filter-container">
-    <h3>Filter</h3>
-    <p></p>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox1" onclick="checkboxTrigger(0)">
-        <label class="form-check-label" id="checkbox1Label" for="checkbox1" value="checkbox1">Warenhuis</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox2" onclick="checkboxTrigger(1)">
-        <label class="form-check-label" id="checkbox2Label" for="checkbox2" value="checkbox2">Bibliotheek</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox3" onclick="checkboxTrigger(2)">
-        <label class="form-check-label" id="checkbox3Label" for="checkbox3" value="checkbox3">Zwembad</label>
-    </div>
-</div>
-
-<div id="chart-container">
-    <div class="chart-overlay chart-overlay-active">
-        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><br />
-        Crunching data...
-    </div>
-=======
-        <option value="null">Selecteer een regio</option>
-        <option value="Centrum">Centrum</option>
-        <option value="Charlois">Charlois</option>
-        <option value="2">...</option>
-        <option value="3">...</option>
-        <option value="4">...</option>
-    </select>
-</div>
-<div> <button id="run" type="button" onclick="update_chart()">Show</button> </div>
 
 <h1>Draagt een hogere criminaliteit bij aan een daling van de huizenprijs?</h1>
 <BR /><BR>
 
+<div class="chart_selector">
+    <label>
+        <input type="radio" name="type" value="A" onclick="setType(this.value);" checked="checked" /> A
+    </label>
+    <label>
+        <input type="radio" name="type" value="B" onclick="setType(this.value);" /> B
+    </label>
+    <label>
+        <input type="radio" name="type" value="C" onclick="setType(this.value);" /> C
+    </label>
+    <label>
+        <input type="radio" name="type" value="D" onclick="setType(this.value);" /> D
+    </label>
+</div>
+
 <div id="chart-container">
->>>>>>> lucri
     <canvas id="chart"></canvas>
 </div>
 <!-- Drop-down -->
@@ -209,27 +172,6 @@
     var ctx = document.getElementById("chart");
 
     // Data dataset 0
-<<<<<<< HEAD
-    // This dataset is the data from houseprices and street
-    var datasetArray = [{
-        label: 'Huisprijs',
-        data: [11.5, 20],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-        ],
-        borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-        ],
-        borderWidth: 2
-    }]
-    //hier zet je de straat namen
-    var data = {
-        labels: ["Cool", "CS-kwartier", "Nieuwe Werk / Dijkzigt", "Oude Westen"],
-        datasets: datasetArray
-    };
-=======
     // This dataset is the data from NS and File and will always be rendered
     var data = {
         labels: ["A", "B"],
@@ -247,7 +189,6 @@
         ]
 
     }
->>>>>>> lucri
 
     var options = {
         // Doesn't maintain the original aspect ratio when resizing
@@ -300,12 +241,6 @@
         options: options,
         data: data
     });
-
-    function update_chart() {
-        var e = document.getElementById("chart-selector");
-        var strRegion = e.options[e.selectedIndex].value
-    };
-
 
 </script>
 
