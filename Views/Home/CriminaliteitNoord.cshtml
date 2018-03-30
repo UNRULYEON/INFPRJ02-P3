@@ -146,7 +146,7 @@
 <h2>@ViewData["Title"]</h2>
 
 <h1>Draagt een hogere criminaliteit bij aan een daling van de huizenprijs?</h1>
-<h1>Regio: Feijenoord</h1>
+<h1>Regio: Noord</h1>
 <h3>Rotterdam</h3>
 <BR /><div> <button id="run" type="button" onclick="window.location.href='/Home/Criminaliteit'">Ga terug naar selectie</button> </div><BR>
 <BR /><BR>
@@ -162,17 +162,17 @@
     // Data dataset 0
     // This dataset is the data from NS and File and will always be rendered
     var data = {
-        labels: ["A", "B"],
+        labels: ['Agniesebuurt', 'Bergpolder', 'Blijdorp/Blijdorpsepolder', 'Liskwartier', 'Oude Noorden', 'Provenierswijk'],
         datasets: [
             {
                 label: "Huisprijs",
                 backgroundColor: "blue",
-                data: [400, 3500],
+                data: [14.84, 15.42, 18.41, 16.17, 14.10, 15.22],
             },
             {
                 label: "Misdrijf",
                 backgroundColor: "red",
-                data: [660, 2200],
+                data: [619, 509, 1135, 623, 1385, 428],
             }
         ]
 

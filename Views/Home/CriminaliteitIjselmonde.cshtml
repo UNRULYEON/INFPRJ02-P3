@@ -141,12 +141,15 @@
     svg {
         stroke: #f2499d;
     }
+
+    
 </style>
+
 
 <h2>@ViewData["Title"]</h2>
 
 <h1>Draagt een hogere criminaliteit bij aan een daling van de huizenprijs?</h1>
-<h1>Regio: Feijenoord</h1>
+<h2>Regio: Ijsselmonde</h2>
 <h3>Rotterdam</h3>
 <BR /><div> <button id="run" type="button" onclick="window.location.href='/Home/Criminaliteit'">Ga terug naar selectie</button> </div><BR>
 <BR /><BR>
@@ -162,17 +165,17 @@
     // Data dataset 0
     // This dataset is the data from NS and File and will always be rendered
     var data = {
-        labels: ["A", "B"],
+        labels: ['Beverwaard', 'Groot Ijsselmonde - Noord', 'Groot Ijsselmonde - Zuid', 'Lombardijen', 'Oud IJsselmonde'],
         datasets: [
             {
                 label: "Huisprijs",
                 backgroundColor: "blue",
-                data: [400, 3500],
+                data: [13.48, 15.88, 14.34, 14.17, 17.13],
             },
             {
                 label: "Misdrijf",
                 backgroundColor: "red",
-                data: [660, 2200],
+                data: [380, 472, 654, 950, 780],
             }
         ]
 
