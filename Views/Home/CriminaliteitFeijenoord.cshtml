@@ -1,0 +1,255 @@
+﻿<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" </script>
+    <script src="/js/my.js"></script>
+</head>
+@{
+    ViewData["Title"] = "Criminaliteit";
+}
+<style>
+    #chart-container {
+        display: inline-block;
+        position: relative;
+        margin: auto;
+        height: auto;
+        width: 100%;
+        z-index: 5;
+    }
+
+    .filter-container {
+        width: 500px;
+        height: auto;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 20px auto;
+        padding: 0 20px 15px;
+    }
+
+    .chart-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #FFFFFF;
+        z-index: -10;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.5em;
+        opacity: 0;
+        transition: all 0.25s ease-in-out;
+    }
+
+    .chart-overlay-active {
+        z-index: 10 !important;
+        opacity: 1;
+        transition: opacity 0.25s ease-in-out;
+    }
+
+    #chart {
+        width: 100% !important;
+        height: 100% !important;
+        background-color: #FFFFFF;
+    }
+
+    @@media screen and (max-width: 767px) {
+        .filter-container {
+            width: 100%;
+        }
+    }
+
+    .spinner {
+        -webkit-animation: rotation 1.35s linear infinite;
+        animation: rotation 1.35s linear infinite;
+        margin: 20px 0;
+    }
+
+    @@-webkit-keyframes rotation {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+    }
+
+    @@keyframes rotation {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+    }
+
+    .chart_selector label {
+        margin: 0px 10px;
+        cursor: pointer;
+    }
+
+    .circle {
+        stroke-dasharray: 180;
+        stroke-dashoffset: 0;
+        -webkit-transform-origin: center;
+        -ms-transform-origin: center;
+        transform-origin: center;
+        -webkit-animation: turn 1.35s ease-in-out infinite;
+        animation: turn 1.35s ease-in-out infinite;
+    }
+
+    @@-webkit-keyframes turn {
+        0% {
+            stroke-dashoffset: 180;
+        }
+
+        50% {
+            stroke-dashoffset: 45;
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+        }
+
+        100% {
+            stroke-dashoffset: 180;
+            -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+        }
+    }
+
+    @@keyframes turn {
+        0% {
+            stroke-dashoffset: 180;
+        }
+
+        50% {
+            stroke-dashoffset: 45;
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+        }
+
+        100% {
+            stroke-dashoffset: 180;
+            -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+        }
+    }
+
+    svg {
+        stroke: #f2499d;
+    }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+<h1>Draagt een hogere criminaliteit bij aan een daling van de huizenprijs?</h1>
+<h1>Regio: Feijenoord</h1>
+<h3>Rotterdam</h3>
+<BR /><div> <button id="run" type="button" onclick="window.location.href='/Home/Criminaliteit'">Ga terug naar selectie</button> </div><BR>
+<BR /><BR>
+
+<div id="chart-container">
+    <canvas id="chart"></canvas>
+</div>
+<!-- Drop-down -->
+<script>
+    // Gets the reference to the canvas
+    var ctx = document.getElementById("chart");
+
+    // Data dataset 0
+    // This dataset is the data from NS and File and will always be rendered
+    var data = {
+        labels: ["A", "B"],
+        datasets: [
+            {
+                label: "Huisprijs",
+                backgroundColor: "blue",
+                data: [4, 5],
+            },
+            {
+                label: "Misdrijf",
+                backgroundColor: "red",
+                data: [6, 9],
+            }
+        ]
+
+    }
+
+    var options = {
+        // Doesn't maintain the original aspect ratio when resizing
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+                // Label X-axis
+                scaleLabel: {
+                    display: false,
+                    //labelString: ''
+                },
+                stacked: false
+            }],
+            yAxes: [{
+                ticks: {
+                    // Y-axis starts at zero
+                    beginAtZero: true,
+                    // Maximum of the Y-axis
+                    //max: 5,
+                    // Minimum of the Y-axis
+                    min: 0,
+                    // How big the increment is
+                    stepSize: 2
+                },
+                // Label Y-axis
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Tijd (minuten)'
+                },
+                stacked: false
+            }]
+        },
+        // Animations
+        animation: {
+            duration: 200
+        },
+        // Padding around the chart
+        layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
+        }
+    };
+
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        options: options,
+        data: data
+    });
+
+
+    $("#1").click(function () {
+        var data = {
+            labels: ["S", "A"],
+            datasets: [
+                {
+                    label: "Huisprijs",
+                    backgroundColor: "blue",
+                    data: [2, 3],
+                },
+                {
+                    label: "Misdrijf",
+                    backgroundColor: "red",
+                    data: [3, 7],
+                }
+            ]
+
+        }
+        chart.update();
+    });
+
+</script>
+
