@@ -29,6 +29,67 @@ namespace INFPRJ02_P3.Controllers
             return View();
         }
 
+        public IActionResult CriminaliteitCentrum()
+        {
+            ViewData["Message"] = "CriminaliteitCentrum";
+
+            return View();
+        }
+        public IActionResult CriminaliteitCharlois()
+        {
+            ViewData["Message"] = "CriminaliteitCharlois";
+
+            return View();
+        }
+        public IActionResult CriminaliteitDelfshaven()
+        {
+            ViewData["Message"] = "CriminaliteitDelfshaven";
+
+            return View();
+        }
+        public IActionResult CriminaliteitFeijenoord()
+        {
+            ViewData["Message"] = "CriminaliteitFeijenoord";
+
+            return View();
+        }
+        public IActionResult CriminaliteitHillegersebergSchiebroek()
+        {
+            ViewData["Message"] = "CriminaliteitHillegersebergSchiebroek";
+
+            return View();
+        }
+        public IActionResult CriminaliteitIjselmonde()
+        {
+            ViewData["Message"] = "CriminaliteitIjselmonde";
+
+            return View();
+        }
+        public IActionResult CriminaliteitKralingenCrooswijk()
+        {
+            ViewData["Message"] = "CriminaliteitKralingenCrooswijk";
+
+            return View();
+        }
+        public IActionResult CriminaliteitNoord()
+        {
+            ViewData["Message"] = "CriminaliteitNoord";
+
+            return View();
+        }
+        public IActionResult CriminaliteitOverschie()
+        {
+            ViewData["Message"] = "CriminaliteitOverschie";
+
+            return View();
+        }
+        public IActionResult CriminaliteitPrinsAlexander()
+        {
+            ViewData["Message"] = "CriminaliteitPrinsAlexander";
+
+            return View();
+        }
+
         public IActionResult Recreatie()
         {
             ViewData["Message"] = "Recreatie";
