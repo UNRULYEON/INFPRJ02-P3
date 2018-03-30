@@ -1,311 +1,459 @@
-﻿<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" </script>
-    <script src="/js/my.js"></script>
-</head>
-@{
-    ViewData["Title"] = "Criminaliteit";
+﻿@{
+  ViewData["Title"] = "TODO";
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <style>
-    #chart-container {
-        display: inline-block;
-        position: relative;
-        margin: auto;
-        height: auto;
+  #chart-container {
+    display: inline-block;
+    position: relative;
+    margin: auto;
+    height: 700px;
+    width: 100%;
+    z-index: 5;
+  }
+
+  .filter-container{
+    width: 100%;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 20px 0;
+    padding: 0 20px 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .checkbox-container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px 10px 0;
+  }
+
+  .chart-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFF;
+    z-index: -10;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .chart-overlay-active{
+    z-index: 10 !important;
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+  }
+
+  #chart{
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #FFFFFF;
+  }
+  
+  @@media screen and (max-width: 767px) {
+    .filter-container{
         width: 100%;
-        z-index: 5;
     }
+  }
 
-    .filter-container {
-        width: 500px;
-        height: auto;
-        border: 1px solid black;
-        border-radius: 5px;
-        margin: 20px auto;
-        padding: 0 20px 15px;
-    }
+  .spinner-wrapper {
+    position: relative;
+    width: 4em;
+    height: 4em;
+    border-radius: 100%;
+    left: calc(50% - 2em);
+    margin: 20px 0;
+  }
 
-    .chart-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #FFFFFF;
-        z-index: -10;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.5em;
-        opacity: 0;
-        transition: all 0.25s ease-in-out;
-    }
+  .spinner-wrapper::after {
+    content: "";
+    background: #fff;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+  } 
 
-    .chart-overlay-active {
-        z-index: 10 !important;
-        opacity: 1;
-        transition: opacity 0.25s ease-in-out;
-    }
+  .rotator {
+    position: relative;
+    width: 4em;
+    border-radius: 4em;
+    overflow: hidden;
+    animation: rotate 2000ms infinite linear;
+  }
 
-    #chart {
-        width: 100% !important;
-        height: 100% !important;
-        background-color: #FFFFFF;
-    }
+  .rotator:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f2499d;
+    border: 3px solid #fff;
+    border-radius: 100%;
+  }
 
-    @@media screen and (max-width: 767px) {
-        .filter-container {
-            width: 100%;
-        }
-    }
+  .inner-spin {
+    background: #fff;
+    height: 4em;
+    width: 2em;
+  }
 
-    .spinner {
-        -webkit-animation: rotation 1.35s linear infinite;
-        animation: rotation 1.35s linear infinite;
-        margin: 20px 0;
-    }
+  .inner-spin {
+    animation: rotate-left 2500ms infinite cubic-bezier(0.445, 0.050, 0.550, 0.950);
+    border-radius: 2em 0 0 2em;
+    transform-origin: 2em 2em;
+  }
 
-    @@-webkit-keyframes rotation {
-        0% {
-            -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
+  .inner-spin:last-child {
+    animation: rotate-right 2500ms infinite cubic-bezier(0.445, 0.050, 0.550, 0.950);
+    margin-top: -4em;
+    border-radius: 0 2em 2em 0;
+    float: right;
+    transform-origin: 0 50%;
+  }
 
-        100% {
-            -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-    }
+  @@keyframes rotate-left {
+    60%, 75%, 100% {
+        transform: rotate(360deg);
+      }
+  }
 
-    @@keyframes rotation {
-        0% {
-            -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
+  @@keyframes rotate {
+    0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+  }
 
-        100% {
-            -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
-        }
-    }
+  @@keyframes rotate-right {
+    0%, 25%, 45% {
+        transform: rotate(0);
+      }
 
-    .circle {
-        stroke-dasharray: 180;
-        stroke-dashoffset: 0;
-        -webkit-transform-origin: center;
-        -ms-transform-origin: center;
-        transform-origin: center;
-        -webkit-animation: turn 1.35s ease-in-out infinite;
-        animation: turn 1.35s ease-in-out infinite;
-    }
-
-    @@-webkit-keyframes turn {
-        0% {
-            stroke-dashoffset: 180;
-        }
-
-        50% {
-            stroke-dashoffset: 45;
-            -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-        }
-
-        100% {
-            stroke-dashoffset: 180;
-            -webkit-transform: rotate(450deg);
-            transform: rotate(450deg);
-        }
-    }
-
-    @@keyframes turn {
-        0% {
-            stroke-dashoffset: 180;
-        }
-
-        50% {
-            stroke-dashoffset: 45;
-            -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-        }
-
-        100% {
-            stroke-dashoffset: 180;
-            -webkit-transform: rotate(450deg);
-            transform: rotate(450deg);
-        }
-    }
-
-    svg {
-        stroke: #f2499d;
-    }
+      100% {
+        transform: rotate(360deg);
+      }
+  }
 </style>
 
-
-
-<h2>@ViewData["Title"]</h2>
-
-<div>
-    <select id="chart-selector" name="chart-selector">
-<<<<<<< HEAD
-        <option value="">Selecteer een regio</option>
-        <option value="Centrum">Centrum</option>
-        <option value="Charlois">Charlois</option>
-        <option value="2">Noord</option>
-
-    </select>
-</div>
-<div> <button id="run" type="button" onclick="new_page()">Selecteer</button> </div>
-
-<script>
-    function new_page() {
-        var e = document.getElementById("chart-selector");
-        var strUser = e.options[e.selectedIndex].value;
-        window.location.href = "/Home/Recreatie" + strUser;
-
-        }
-</script>
+<h1>TODO: VRAAG</h1>
 
 <div class="filter-container">
-    <h3>Filter</h3>
-    <p></p>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox1" onclick="checkboxTrigger(0)">
-        <label class="form-check-label" id="checkbox1Label" for="checkbox1" value="checkbox1">Warenhuis</label>
+  <h3>Filters</h3>
+  <div style="display: flex; flex-direction: row;">
+    <!-- TODO: Copy the div checkbox-container to add more checkboxes -->
+    <!-- Every id should be unique -->
+    <!-- The numbers in the onclick function should correspond with the number at the end of the id -->
+    <!-- The id should match the for in the label -->
+    <div class="checkbox-container">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input checkbox_class" id="checkbox1" onclick="checkboxTrigger(0)" checked>
+        <label class="form-check-label" id="checkbox1Label" for="checkbox1" value="checkbox1">TODO</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input checkbox_class" id="checkbox2" onclick="checkboxTrigger(1)">
+        <label class="form-check-label" id="checkbox2Label" for="checkbox2" value="checkbox2">TODO</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input checkbox_class" id="checkbox3" onclick="checkboxTrigger(2)">
+        <label class="form-check-label" id="checkbox3Label" for="checkbox3" value="checkbox3">TODO</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input checkbox_class" id="checkbox4" onclick="checkboxTrigger(3)">
+        <label class="form-check-label" id="checkbox4Label" for="checkbox4" value="checkbox4">TODO</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input checkbox_class" id="checkbox5" onclick="checkboxTrigger(4)">
+        <label class="form-check-label" id="checkbox5Label" for="checkbox5" value="checkbox5">TODO</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input checkbox_class" id="checkbox6" onclick="checkboxTrigger(5)">
+        <label class="form-check-label" id="checkbox6Label" for="checkbox6" value="checkbox6">TODO</label>
+      </div>
     </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox2" onclick="checkboxTrigger(1)">
-        <label class="form-check-label" id="checkbox2Label" for="checkbox2" value="checkbox2">Bibliotheek</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox3" onclick="checkboxTrigger(2)">
-        <label class="form-check-label" id="checkbox3Label" for="checkbox3" value="checkbox3">Zwembad</label>
-    </div>
+  </div>
 </div>
 
 <div id="chart-container">
-    <div class="chart-overlay chart-overlay-active">
-        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg><br />
-        Crunching data...
+  <div class="chart-overlay chart-overlay-active">
+    <div class="spinner-wrapper">
+      <div class="rotator">
+        <div class="inner-spin"></div>
+        <div class="inner-spin"></div>
+      </div>
     </div>
-=======
-        <option value="null">Selecteer een regio</option>
-        <option value="Centrum">Centrum</option>
-        <option value="Charlois">Charlois</option>
-        <option value="2">...</option>
-        <option value="3">...</option>
-        <option value="4">...</option>
-    </select>
+    <br/>
+    Crunching data...
+  </div>
+  <canvas id="chart"></canvas>
 </div>
-<div> <button id="run" type="button" onclick="update_chart()">Show</button> </div>
 
-<h1>Draagt een hogere criminaliteit bij aan een daling van de huizenprijs?</h1>
-<BR /><BR>
-
-<div id="chart-container">
->>>>>>> lucri
-    <canvas id="chart"></canvas>
-</div>
-<!-- Drop-down -->
 <script>
-    // Gets the reference to the canvas
-    var ctx = document.getElementById("chart");
+  function toggleOverlay() {
+  console.log('Toggling class');
 
-    // Data dataset 0
-<<<<<<< HEAD
-    // This dataset is the data from houseprices and street
-    var datasetArray = [{
-        label: 'Huisprijs',
-        data: [11.5, 20],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-        ],
-        borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-        ],
-        borderWidth: 2
-    }]
-    //hier zet je de straat namen
-    var data = {
-        labels: ["Cool", "CS-kwartier", "Nieuwe Werk / Dijkzigt", "Oude Westen"],
-        datasets: datasetArray
-    };
-=======
-    // This dataset is the data from NS and File and will always be rendered
-    var data = {
-        labels: ["A", "B"],
-        datasets: [
-            {
-                label: "Huisprijs",
-                backgroundColor: "blue",
-                data: [4, 5],
-            },
-            {
-                label: "Misdrijf",
-                backgroundColor: "red",
-                data: [6, 9],
-            }
-        ]
+    var element = document.querySelector('.chart-overlay');
+    element.classList.toggle('chart-overlay-active');
+  }
 
-    }
->>>>>>> lucri
-
-    var options = {
-        // Doesn't maintain the original aspect ratio when resizing
-        maintainAspectRatio: false,
-        scales: {
-            xAxes: [{
-                // Label X-axis
-                scaleLabel: {
-                    display: false,
-                    //labelString: ''
-                },
-                stacked: false
-            }],
-            yAxes: [{
-                ticks: {
-                    // Y-axis starts at zero
-                    beginAtZero: true,
-                    // Maximum of the Y-axis
-                    //max: 5,
-                    // Minimum of the Y-axis
-                    min: 0,
-                    // How big the increment is
-                    stepSize: 2
-                },
-                // Label Y-axis
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Tijd (minuten)'
-                },
-                stacked: false
-            }]
-        },
-        // Animations
-        animation: {
-            duration: 200
-        },
-        // Padding around the chart
-        layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        }
-    };
-
-    var chart = new Chart(ctx, {
-        type: 'bar',
-        options: options,
-        data: data
-    });
-
-    function update_chart() {
-        var e = document.getElementById("chart-selector");
-        var strRegion = e.options[e.selectedIndex].value
-    };
-
-
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 </script>
 
+<script>
+  
+  // Gets the reference to the canvas
+  var ctx = document.getElementById("chart").getContext("2d");
+
+  // Array for the checkboxes - TODO: This has to be the same amount as the checkboxes
+  // First one is set to true so the chart is generated with at least one dataset
+  var checkedBoxes = [true, false, false, false, false, false];
+
+  // Empty arrays
+  var labelArray = [];
+  var datasetArray = [];
+  // TODO: Add the data here. The array 'datasetArrayBar1' is the first bar that's red.
+  var datasetArrayBar1 = [];
+  var datasetArrayBar2 = [];
+
+
+  // Creating an empty chart
+  var chart = new Chart(ctx,{
+    type: 'bar',
+    data: {},
+    options: {}
+  });
+
+  var data = {
+    // Label that appears below the chart
+    labels: labelArray,
+    datasets: datasetArray
+  };
+
+  var options = {
+    // Doesn't maintain the original aspect ratio when resizing
+    maintainAspectRatio: false,
+    barValueSpacing: 20,
+    scales: {
+      yAxes: [{
+          ticks: {
+            // Y-axis starts at zero
+            beginAtZero: true
+        },
+        // Label Y-axis     
+        scaleLabel: {
+            display: true,
+            labelString: 'TODO'
+          }
+      }]
+    },
+    // Animations
+    animation: {
+      duration: 2000
+    },
+    // Padding around the chart
+    layout: {
+      padding: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0
+      }
+    }
+  };
+
+  // This function creates a new chart with the data from the checkboxes which are set on true
+  async function createChart(chart){
+    // Destroyes and re-appends the canvas element in the container
+    $('#chart').remove();
+    $('#chart-container').append('<canvas id="chart"><canvas>');
+    canvas = document.querySelector('#chart');
+    ctx = canvas.getContext('2d');
+    ctx.canvas.width = $('#chart').width(); 
+    ctx.canvas.height = $('#chart').height();
+
+    // Empty the arrays
+    datasetArray.length = 0;
+    labelArray.length = 0;
+    datasetArrayBar1.length = 0;
+    datasetArrayBar2.length = 0;
+
+    // If you want to add more datasets, you can copy the comment which start with "Dataset n" and ends with the if statement and paste
+    // it at the and of the previous dataset. The only thing that has to be changed is the data
+
+    // Dataset 1 - Push dataset 1 to the array if the checkbox is true
+    await sleep(500);
+    if (checkedBoxes[0]){
+      // TODO: this is the label that appears under the grouped bars
+      labelArray.push("TODOBUURT1");
+
+      // This code appends the number at the and of the array.
+      // TODO: Enter here the correct data
+      datasetArrayBar1[datasetArrayBar1.length] = 1;
+      datasetArrayBar2[datasetArrayBar2.length] = 10;
+      console.log("Pushed dataset 1");
+    };
+
+    // Dataset 2 - Push dataset 2 to the array if the checkbox is true
+    await sleep(500);
+    if (checkedBoxes[1]){
+      // TODO: this is the label that appears under the grouped bars
+      labelArray.push("TODOBUURT2");
+
+      // This code appends the number at the and of the array.
+      // TODO: Enter here the correct data
+      datasetArrayBar1[datasetArrayBar1.length] = 2;
+      datasetArrayBar2[datasetArrayBar2.length] = 11;
+      console.log("Pushed dataset 2");
+    };
+
+    // Dataset 3 - Push dataset 3 to the array if the checkbox is true
+    await sleep(500);
+    if (checkedBoxes[2]){
+      // TODO: this is the label that appears under the grouped bars
+      labelArray.push("TODOBUURT3");
+
+      // This code appends the number at the and of the array.
+      // TODO: Enter here the correct data
+      datasetArrayBar1[datasetArrayBar1.length] = 3;
+      datasetArrayBar2[datasetArrayBar2.length] = 12;
+
+      console.log("Pushed dataset 3");
+    };
+
+    // Dataset 4 - Push dataset 4 to the array if the checkbox is true
+    await sleep(500);
+    if (checkedBoxes[3]){
+      // TODO: this is the label that appears under the grouped bars
+      labelArray.push("TODOBUURT4");
+
+      // This code appends the number at the and of the array.
+      // TODO: Enter here the correct data
+      datasetArrayBar1[datasetArrayBar1.length] = 4;
+      datasetArrayBar2[datasetArrayBar2.length] = 13;
+
+      console.log("Pushed dataset 5");
+    };
+
+    // Dataset 5 - Push dataset 5 to the array if the checkbox is true
+    await sleep(500);
+    if (checkedBoxes[4]){
+      // TODO: this is the label that appears under the grouped bars
+      labelArray.push("TODOBUURT5");
+
+      // This code appends the number at the and of the array.
+      // TODO: Enter here the correct data
+      datasetArrayBar1[datasetArrayBar1.length] = 5;
+      datasetArrayBar2[datasetArrayBar2.length] = 14;
+
+      console.log("Pushed dataset 5");
+    };
+
+    // Dataset 6 - Push dataset 6 to the array if the checkbox is true
+    await sleep(500);
+    if (checkedBoxes[5]){
+      // TODO: this is the label that appears under the grouped bars
+      labelArray.push("TODOBUURT6");
+
+      // This code appends the number at the and of the array.
+      // TODO: Enter here the correct data
+      datasetArrayBar1[datasetArrayBar1.length] = 6;
+      datasetArrayBar2[datasetArrayBar2.length] = 15;
+      console.log("Pushed dataset 6");
+    };
+
+    datasetArray.push({
+      // TODO: This is the label that appears above the chart
+      label: 'TODO1',
+      data: datasetArrayBar1,
+      // TODO: Change here the color for this bar
+      backgroundColor: "red",
+      borderWidth: 2
+    });
+
+    datasetArray.push({
+      // TODO: This is the label that appears above the chart
+      label: 'TODO2',
+      data: datasetArrayBar2,
+      // TODO: Change here the color for this bar
+      backgroundColor: "blue",
+      borderWidth: 2
+    });
+
+
+    console.log("Current array: ");
+    console.log(datasetArray);
+
+    await sleep(500);
+    // Creates the new chart with the specified data
+    var chart = new Chart(ctx,{
+      type: 'bar',
+      options: options,
+      data: data
+    });
+
+    console.log("Created chart");
+
+    // Re-enables the checkboxes
+    await sleep(500);
+    var cells = document.getElementsByClassName("checkbox_class"); 
+    for (var i = 0; i < cells.length; i++) { 
+        cells[i].disabled = false;
+    }
+
+    // Toggles the overlay so it becomes transparant again and with z-index: -10
+    toggleOverlay();    
+  };
+
+  // Runs when a checkbox is checked or unchecked
+  async function checkboxTrigger(c){
+
+    // Toggle the overlay so the spinner becomes visible with z-index: 10
+    toggleOverlay();
+
+    // Disable checkboxes
+    var cells = document.getElementsByClassName("checkbox_class"); 
+    for (var i = 0; i < cells.length; i++) { 
+        cells[i].disabled = true;
+    }
+
+    console.log("Checkbox number: " + ( c+1 ));
+    console.log(checkedBoxes);
+
+    if (checkedBoxes[c]){
+      // Checkbox 1 - Unchecked
+      checkedBoxes[c] = false;
+      console.log(checkedBoxes);
+    } else {
+      // Checkbox 1 - Checked
+      checkedBoxes[c] = true;
+      console.log(checkedBoxes);
+    };
+    
+    // Calls the funtion to create a new chart
+    await sleep(500);
+    // Destroy the old chart
+    chart.destroy();
+    console.log("Deleted chart");
+    // Runs function create chart
+    createChart(chart);
+  };
+
+  // When the page is loaded, run createChart so the chart with the base data is rendered
+  document.onload = createChart();
+</script>
