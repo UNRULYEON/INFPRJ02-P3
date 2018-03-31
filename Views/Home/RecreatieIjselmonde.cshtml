@@ -10,7 +10,7 @@
         display: inline-block;
         position: relative;
         margin: auto;
-        height: auto;
+        height: 550px;
         width: 100%;
         z-index: 5;
     }
@@ -274,9 +274,12 @@
 
     // This function creates a new chart with the data from the checkboxes which are set on true
     async function createChart() {
-
-        var ctx = document.getElementById("chart").getContext("2d");
-
+        $('#chart').remove();
+        $('#chart-container').append('<canvas id="chart"><canvas>');
+        canvas = document.querySelector('#chart');
+        ctx = canvas.getContext('2d');
+        ctx.canvas.width = $('#chart').width();
+        ctx.canvas.height = $('#chart').height();
         console.log(chart);
         datasetArray.length = 1;
 
