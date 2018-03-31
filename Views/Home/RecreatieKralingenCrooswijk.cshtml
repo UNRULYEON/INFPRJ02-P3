@@ -10,7 +10,7 @@
         display: inline-block;
         position: relative;
         margin: auto;
-        height: auto;
+        height: 550px;
         width: 100%;
         z-index: 5;
     }
@@ -204,22 +204,24 @@
         label: 'Huisprijs',
         data: [16.20, 13.11, 24.73, 17.12, 14.83, 16.92, 19.96],
         backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
+            'rgba(66, 217, 2, 0.2)',
+            'rgba(66, 217, 2, 0.2)',
+            'rgba(66, 217, 2, 0.2)',
+            'rgba(66, 217, 2, 0.2)',
+            'rgba(66, 217, 2, 0.2)',
+            'rgba(66, 217, 2, 0.2)',
+            'rgba(66, 217, 2, 0.2)',
+            'rgba(66, 217, 2, 0.2)',
         ],
         borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
-            'rgba(255,99,132,1)',
+            'rgba(66,217,2,1)',
+            'rgba(66,217,2,1)',
+            'rgba(66,217,2,1)',
+            'rgba(66,217,2,1)',
+            'rgba(66,217,2,1)',
+            'rgba(66,217,2,1)',
+            'rgba(66,217,2,1)',
+            'rgba(66,217,2,1)',
         ],
         borderWidth: 2
     }]
@@ -278,9 +280,12 @@
 
     // This function creates a new chart with the data from the checkboxes which are set on true
     async function createChart() {
-
-        var ctx = document.getElementById("chart").getContext("2d");
-
+        $('#chart').remove();
+        $('#chart-container').append('<canvas id="chart"><canvas>');
+        canvas = document.querySelector('#chart');
+        ctx = canvas.getContext('2d');
+        ctx.canvas.width = $('#chart').width();
+        ctx.canvas.height = $('#chart').height();
         console.log(chart);
         datasetArray.length = 1;
 
@@ -297,7 +302,7 @@
                     'rgba(255, 206, 86, 1)'
                 ],
                 borderWidth: 3,
-                pointBackgroundColor: 'rgba(255, 255, 255, 1)',
+                pointBackgroundColor: 'rgba(255, 206, 86, 1)',
                 pointBorderColor: 'rgba(255, 206, 86, 1)',
                 pointBorderWidth: 2,
                 pointRadius: 5,
@@ -320,7 +325,7 @@
                     'rgba(81, 133, 255, 1)'
                 ],
                 borderWidth: 3,
-                pointBackgroundColor: 'rgba(255, 255, 255, 1)',
+                pointBackgroundColor: 'rgba(81, 133, 255, 1)',
                 pointBorderColor: 'rgba(81, 133, 255, 1)',
                 pointBorderWidth: 2,
                 pointRadius: 5,
@@ -341,11 +346,11 @@
                     'rgba(0, 0, 0, 0)'
                 ],
                 borderColor: [
-                    'rgba(66, 217, 2, 1)'
+                    'rgba(191,63,63, 1)'
                 ],
                 borderWidth: 3,
-                pointBackgroundColor: 'rgba(255, 255, 255, 1)',
-                pointBorderColor: 'rgba(66, 217, 2, 1)',
+                pointBackgroundColor: 'rgba(191,63,63, 1)',
+                pointBorderColor: 'rgba(191,63,63, 1)',
                 pointBorderWidth: 2,
                 pointRadius: 5,
                 pointHoverRadius: 7,
