@@ -29,6 +29,13 @@ namespace INFPRJ02_P3.Controllers
             return View();
         }
 
+        public IActionResult CriminaliteitGemiddeld()
+        {
+            ViewData["Message"] = "CriminaliteitGemiddeld";
+
+            return View();
+        }
+
         public IActionResult CriminaliteitCentrum()
         {
             ViewData["Message"] = "CriminaliteitCentrum";
