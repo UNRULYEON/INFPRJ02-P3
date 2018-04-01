@@ -38,20 +38,4 @@ Application started. Press Ctrl+C to shut down.
 
 - [ASP.NET](https://www.asp.net/mvc)
 
-## Authors
 
-- **Abdukarim Omar**  - [abdukarimo](https://github.com/abdukarimo)
-
-- **Abdullah Achahbar**  \- [achahbaros](https://github.com/achahbaros)
-
-- **Amar Kisoensingh**  \- [UNRULYEON](https://github.com/UNRULYEON)
-
-- **Erik Serjan**  \- [Sir-DANKinson](https://github.com/Sir-DANKinson)
-
-- **Erwin Maarleveld**  \- [Noot015](https://github.com/Noot015)
-
-- **Jordy Leffers** \- [Hakoen](https://github.com/Hakoen)
-
-## Acknowledgments
-
-Thanks to [**Giuseppe Maggiore**](https://www.grandeomega.com/) for the inspiration
