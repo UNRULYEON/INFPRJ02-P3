@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 150px;
     padding-bottom: 20px;
 }
 
@@ -19,8 +19,8 @@
 }
 
 .navbar-inverse {
-    background-color: #f2499d !important;
-    border-color: rgb(235, 36, 135) !important;
+    background-color: #3366ff !important;
+    min-height: 100px;
 }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
     color: #3b36b5 !important;
@@ -37,9 +37,10 @@
 p.navbar-brand {
     color: #fff !important;
 }
-.container-header{
+.container-header {
     display: flex;
     flex-direction: row;
+    padding-top: 25px;
 }
 .logo{
     width: 25px;

@@ -1,290 +1,54 @@
 ﻿@{
-  ViewData["Title"] = "Hoofdvraag";
+    ViewData["Title"] = "Hoofdvraag";
 }
 
-
 <style>
-  .chart-container {
-    position: relative;
-    margin: auto;
-    height: 20vh;
-    width: 80vw;
-  }
 
-  .filter-container{
-    width: 500px;
-    height: auto;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 20px auto;
-    padding: 0 20px 15px;
-  }
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 20vh;
+        width: 80vw;
+    }
 
-  #chart{
-    width: 100%;
-    height: 100%;
-  }
-  
-  @@media screen and (max-width: 767px) {
-    .filter-container{
+    .filter-container {
+        width: 500px;
+        height: auto;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 20px auto;
+        padding: 0 20px 15px;
+    }
+
+    #chart {
         width: 100%;
+        height: 100%;
     }
-  }
 
-  h1 {
-    margin-left: 50%;
-  }
+    @@media screen and (max-width: 767px) {
+        .filter-container {
+            width: 100%;
+        }
+    }
 
+    h1 {
+        margin-left: 50%;
+    }
 </style>
-
 <h1>Team Lucri</h1>
+<h2>Recreatie</h2>
+<p>
+    Onder het kopje ‘recreatie’ vindt u de visualisatie van de volgende vragen:
+    Beïnvloedt de nabijheid van recreationele voorzieningen de huizenprijzen in de regio Rotterdam? En verschilt dit per voorziening?
+    Hiervoor is gebruik gemaakt van data van het CBS, uit het jaar 2016. De gemiddelde WOZ-waarde per wijk in Rotterdam wordt afgezet tegen de minimale afstand vanuit de wijk tot het dichtstbijzijnde warenhuis, bibliotheek en/of zwembad.
+    Onder het kopje ‘recreatie’ selecteert u eerst de regio waarvan u de visualisatie wilt bekijken en vervolgens kunt u de verschillende voorzieningen in- en uitschakelen.
+</p>
 
-<div class="filter-container">
-  <h3>Filters</h3>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox1">
-    <label class="form-check-label" id="checkbox1" for="checkbox1" value="checkbox1" onclick="checkboxTrigger(0)">Checkbox 1</label>
-  </div>
-    <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox2">
-    <label class="form-check-label" id="checkbox2" for="checkbox2" value="checkbox2" onclick="checkboxTrigger(1)">Checkbox 2</label>
-  </div>
-    <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox3">
-    <label class="form-check-label" id="checkbox3" for="checkbox3" value="checkbox3" onclick="checkboxTrigger(2)">Checkbox 3</label>
-  </div>
-    <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="checkbox4">
-    <label class="form-check-label" id="checkbox4" for="checkbox4" value="checkbox4" onclick="checkboxTrigger(3)">Checkbox 4</label>
-  </div>
-</div>
-
-<div id="chart-container">
-  <canvas id="chart"></canvas>
-</div>
-
-<script>
-  
-  // Gets the reference to the canvas
-  var ctx = document.getElementById("chart");
-
-  var checkedBoxes = [false, false, false, false];
-
-  // Data dataset 0
-  // This dataset is the data from NS and File and will always be rendered
-  var datasetArray = [{
-    label: 'Gemiddeld minuten vertraging',
-    data: [12, 19],
-    backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 99, 132, 0.2)',
-    ],
-    borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(255,99,132,1)',
-    ],
-    borderWidth: 2
-  }]
-
-  console.log(datasetArray)
-
-  var data = {
-    labels: ["NS", "File"],
-    datasets: datasetArray
-  };
-
-  var options = {
-    // Doesn't maintain the original aspect ratio when resizing
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{  
-        // Label X-axis     
-        scaleLabel: {
-            display: false,
-            //labelString: ''
-        },
-        stacked: true
-      }],
-      yAxes: [{
-          ticks: {
-            // Y-axis starts at zero
-            beginAtZero: true,
-            // Maximum of the Y-axis
-            //max: 5,
-            // Minimum of the Y-axis
-            min: 0,
-            // How big the increment is
-            stepSize: 2
-        },
-        // Label Y-axis     
-        scaleLabel: {
-            display: true,
-            labelString: 'Tijd (minuten)'
-          },
-        stacked: true
-      }]
-    },
-    // Animations
-    animation: {
-      duration: 200
-    },
-    // Padding around the chart
-    layout: {
-      padding: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0
-      }
-    }
-  };
-
-  var chart = new Chart(ctx,{
-    type: 'bar',
-    options: options,
-    data: data
-  });
-
-  // This function creates a new chart with the data from the checkboxes which are set on true
-  function createChart(){
-    // Destroy the old chart
-    chart.destroy();
-
-    datasetArray.length = 1;
-    console.log(datasetArray);
-
-    
-    // Dataset 1 - Push dataset 1 to the array if the checkbox is true
-    if (checkedBoxes[0]){
-      datasetArray.push({
-        label: 'dataset1',
-        data: [30, 40],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(255,99,132,1)',
-        ],
-        borderWidth: 2
-      });
-    };
-
-    // Dataset 2 - Push dataset 1 to the array if the checkbox is true
-    if (checkedBoxes[1]){
-      datasetArray.push({
-        label: 'dataset2',
-        data: [2, 2],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(255,99,132,1)',
-        ],
-        borderWidth: 2
-      });
-    };
-
-    // Dataset 3 - Push dataset 1 to the array if the checkbox is true
-    if (checkedBoxes[2]){
-      datasetArray.push({
-        label: 'dataset3',
-        data: [-10, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(255,99,132,1)',
-        ],
-        borderWidth: 2
-      });
-    };
-
-    // Dataset 4 - Push dataset 1 to the array if the checkbox is true
-    if (checkedBoxes[3]){
-      datasetArray.push({
-        label: 'dataset4',
-        data: [4, 4],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(255,99,132,1)',
-        ],
-        borderWidth: 2
-      });
-    };
-    console.log(datasetArray);
-
-    // Creates the new chart with the specified data
-    var chartNew = new Chart(ctx,{
-      type: 'bar',
-      options: options,
-      data: data
-    });
-  };
-
-  // Runs when a checkbox is checked or unchecked
-  function checkboxTrigger(i){
-
-    console.log(checkedBoxes);
-
-    switch(i){
-      // Checkbox 1
-      case 0:
-        if (checkedBoxes[0]){
-          // Checkbox 1 - Unchecked
-          checkedBoxes[0] = false;
-          console.log(checkedBoxes);
-        } else {
-          // Checkbox 1 - Checked
-          checkedBoxes[0] = true;
-          console.log(checkedBoxes);
-        }
-        break;
-      case 1:
-        if (checkedBoxes[1]){
-          // Checkbox 1 - Unchecked
-          checkedBoxes[1] = false;
-          console.log(checkedBoxes);
-        } else {
-          // Checkbox 1 - Checked
-          checkedBoxes[1] = true;
-          console.log(checkedBoxes);
-        }
-        break;
-      case 2:
-        if (checkedBoxes[2]){
-          // Checkbox 1 - Unchecked
-          checkedBoxes[2] = false;
-          console.log(checkedBoxes);
-        } else {
-          // Checkbox 1 - Checked
-          checkedBoxes[2] = true;
-          console.log(checkedBoxes);
-        }
-        break;
-      case 3:
-        if (checkedBoxes[3]){
-          // Checkbox 1 - Unchecked
-          checkedBoxes[3] = false;
-          console.log(checkedBoxes);
-        } else {
-          // Checkbox 1 - Checked
-          checkedBoxes[3] = true;
-          console.log(checkedBoxes);
-        }
-        break;
-    }
-    
-    // Calls the funtion to create a new chart
-    createChart();
-  }
-</script>
+<h2>Criminaliteit</h2>
+<p>
+    Onder het kopje ‘criminaliteit’ vindt u de visualisatie van de volgende vraag:
+    Draagt een hogere criminaliteit bij aan een daling van de huizenprijs in de regio Rotterdam?
+    Hiervoor is gebruik gemaakt van data van het CBS en buurtmonitor Rotterdam, uit het jaar 2016. De gemiddelde WOZ-waarde per wijk in Rotterdam wordt afgezet tegen het aantal criminaliteit per wijk in Rotterdam.
+    Onder het kopje ‘criminaliteit’ selecteert u eerst de regio waarvan u de visualisatie wilt bekijken en vervolgens krijgt u per wijk de huizenprijs en criminaliteitscijfers te zien over het jaar 2016.
+    De criminaliteitscijfers geven het totaal aantal criminaliteit die hebben plaatsgevonden in het jaar 2016.
+</p>
