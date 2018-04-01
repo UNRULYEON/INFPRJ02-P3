@@ -12542,11 +12542,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\F\\Source\\Repos\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
+      "projectUniqueName": "C:\\Users\\F\\Source\\Repos\\film\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
       "projectName": "INFPRJ02-P3",
-      "projectPath": "C:\\Users\\F\\Source\\Repos\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
+      "projectPath": "C:\\Users\\F\\Source\\Repos\\film\\INFPRJ02-P3\\INFPRJ02-P3.csproj",
       "packagesPath": "C:\\Users\\F\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\F\\Source\\Repos\\INFPRJ02-P3\\obj\\",
+      "outputPath": "C:\\Users\\F\\Source\\Repos\\film\\INFPRJ02-P3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
